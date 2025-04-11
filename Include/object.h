@@ -1,0 +1,26 @@
+#ifndef OBJECT_H
+#define OBJECT_H
+#include "objhelper.h"
+#include "sys/types.h"
+
+
+typedef struct typeobject TypeObject ; 
+
+typedef struct object {
+    ssize_t ref_cnt ; 
+    TypeObject* tp_type ;
+}Object;
+
+
+typedef struct {
+    Object ob_base ; 
+    ssize_t size ; 
+}VarObject; 
+
+#define VarObject_HEAD VarObject ob_base ; 
+
+typedef Object* (*newfunc) (TypeObject* ) ; 
+
+
+
+#endif
