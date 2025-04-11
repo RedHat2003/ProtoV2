@@ -4,5 +4,5 @@
 
 void* Object_Malloc (ssize_t ) ; 
 
-
+void Object_Free (void* ) ; 
 #endif

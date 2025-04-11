@@ -28,3 +28,7 @@ Object_Malloc (ssize_t size) {
     return _Object.malloc(size);
 }
 
+void
+Object_Free (void* ptr){
+    _Object.free (ptr) ; 
+}

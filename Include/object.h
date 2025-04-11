@@ -20,7 +20,9 @@ typedef struct {
 #define VarObject_HEAD VarObject ob_base ; 
 
 typedef Object* (*newfunc) (TypeObject* ) ; 
+typedef void (*destructor) (Object *);
 
-
+#define Object_CAST(op) (Object* )(op)
+#define Object_TYPE(op) ((Object*)op)->tp_type ; 
 
 #endif

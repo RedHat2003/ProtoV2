@@ -9,9 +9,11 @@ set(SOURCES
     Hat/obmalloc.c
     Hat/lifecycle.c
     Hat/objimpl.c
+    Hat/refcount.c
     Object/typeobject.c
     Object/intarrobj.c
-    Object/clinic/intarrobj_impl.c
+    Object/clinic/impl/intarrobj_impl.c
+    
 )
 
 # Create the executable target

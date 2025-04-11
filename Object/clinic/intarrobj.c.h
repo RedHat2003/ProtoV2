@@ -5,5 +5,5 @@
 Object* intarr_new(TypeObject* tp);
 IntArrObject* intarr_alloc(ssize_t size);
 IntArrObject* IntArr_New(ssize_t size);
-
+void intarr_dealloc (Object* op) ; 
 #endif

@@ -14,7 +14,8 @@ TypeObject IntArrObject_Type = {
     .tp_name = "intarr",
     .tp_basicsize = IntArrObject_HEADER_SIZE,
     .tp_itemsize = sizeof(int) ,
-    .tp_new = intarr_new 
+    .tp_new = intarr_new ,
+    .tp_dealloc = intarr_dealloc 
 };
 
 

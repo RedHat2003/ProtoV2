@@ -1,10 +1,8 @@
 #include "Include/clinic/tpobject.h" 
 #include "Include/object.h"
 #include "Include/mem.h"
-void
-_INCREF(Object* ob) {
-    ob->ref_cnt++;
-}
+#include "Include/refcount.h"
+
 
 ssize_t 
 _Object_SIZE(TypeObject* tp) {
@@ -34,6 +32,7 @@ void
 _Object_Init(Object* ob, TypeObject* tp) {
     _SET_TYPE(ob, tp);
     TYPE_INCREF(ob);
+    _NEWREF(ob) ;
     // new reference would be here //
 }
 
@@ -53,4 +52,11 @@ _Object_NewVar(TypeObject* tp , ssize_t nitem) {
     }
     _Object_Var_Init(vob , tp , nitem) ; 
     return vob;
+}
+
+void 
+_Object_Dealloc (Object* op) {
+    TypeObject* type = Object_TYPE(op) ;
+    destructor dealloc = type->tp_dealloc ; 
+    (*dealloc)(op) ; 
 }
