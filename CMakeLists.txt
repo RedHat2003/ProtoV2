@@ -5,14 +5,16 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
 
 # List your source files
 set(SOURCES
-    src/main.c
+    src/main.c 
     Hat/obmalloc.c
     Hat/lifecycle.c
     Hat/objimpl.c
     Hat/refcount.c
     Object/typeobject.c
     Object/intarrobj.c
+    Object/floatarrobj.c
     Object/clinic/impl/intarrobj_impl.c
+    Object/clinic/impl/floatarrobj_impl.c
     
 )
 

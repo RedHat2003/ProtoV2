@@ -6,5 +6,6 @@
 #include "clinic/tpobject.h"
 #include "mem.h"
 #include "Object/clinic/intarrobj.c.h"
+#include "Object/clinic/floatarrobj.c.h"
 
 #endif
