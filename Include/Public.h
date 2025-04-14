@@ -7,5 +7,7 @@
 #include "mem.h"
 #include "Object/clinic/intarrobj.c.h"
 #include "Object/clinic/floatarrobj.c.h"
+#include "Object/clinic/tupleobj.c.h"
+
 
 #endif

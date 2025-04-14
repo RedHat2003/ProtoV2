@@ -6,4 +6,6 @@
 extern TypeObject TypeObject_Type ; 
 extern TypeObject IntArrObject_Type ; 
 extern TypeObject FloatArrObject_Type ; 
+extern TypeObject TupleObjet_Type ; 
+
 #endif
