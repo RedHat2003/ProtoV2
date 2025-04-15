@@ -10,7 +10,9 @@
 
 #define _Tuple_Cast(ob) _CAST(TupleObject*,ob)
 
-ssize_t _Tuple_GET_SIZE (Object* ob) {
+ssize_t Tuple_GET_SIZE (Object* ob) {
     TupleObject* tuple = _Tuple_Cast(ob) ;
     return _SIZE(tuple);
 }
+
+#define Tuple_GET_ITEM(op, index) (_Tuple_Cast(op))->ob_item[(index)]

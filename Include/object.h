@@ -26,5 +26,5 @@ typedef void (*destructor) (Object *);
 
 #define Object_CAST(op) (Object* )(op)
 #define Object_TYPE(op) ((Object*)op)->tp_type ; 
-#define _CAST(type,op) ((type)op) ; 
+#define _CAST(type,op) ((type)op)  
 #endif
