@@ -1,6 +1,6 @@
 #include "Include/clinic/tpobject.h"
 #include "Include/clinic/intarrobj.h"
-#include "clinic/intarrobj.c.h"
+// #include "clinic/intarrobj.c.h"  // implementation header removed, prototypes moved to Include/clinic/intarrobj.h
 #include <Include/types.h>
 
 TypeObject IntArrObject_Type = {

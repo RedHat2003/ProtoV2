@@ -11,5 +11,7 @@ typedef struct {
 
 DEFINE_STRUCT_HEADER_SIZE (TupleObject , ob_item) ; 
 
+/* Public API: get size of tuple */
+ssize_t Tuple_GET_SIZE(Object* ob);
 #endif 
 

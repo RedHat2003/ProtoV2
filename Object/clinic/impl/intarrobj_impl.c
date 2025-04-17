@@ -5,9 +5,10 @@
 #include "Include/clinic/tpobject.h"
 #include "Include/clinic/intarrobj.h"
 
-Object* 
-intarr_new (TypeObject* tp) { 
-    Object* ob = (Object* )Object_Malloc(tp->tp_basicsize) ; 
+Object*
+intarr_new (TypeObject* tp, Object* args) {
+    (void)args;
+    Object* ob = (Object*)Object_Malloc(tp->tp_basicsize);
     return ob;
 }
 void

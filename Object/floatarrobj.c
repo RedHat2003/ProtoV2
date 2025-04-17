@@ -1,6 +1,6 @@
 #include "Include/clinic/tpobject.h"
 #include "Include/clinic/floatarrobj.h"
-#include "clinic/floatarrobj.c.h"
+// #include "clinic/floatarrobj.c.h"  // implementation header removed, prototypes in Include/clinic/floatarrobj.h
 #include <Include/types.h>
 
 TypeObject FloatArrObject_Type  = {

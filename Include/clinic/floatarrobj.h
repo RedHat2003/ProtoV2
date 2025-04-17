@@ -3,6 +3,7 @@
 
 #include "Include/object.h"
 #include "Include/objhelper.h"
+#include "Include/clinic/tpobject.h"
 
 
 struct _farr {
@@ -16,6 +17,12 @@ typedef struct buffobj {
 
 
 DEFINE_STRUCT_HEADER_SIZE(FloatArrObject,data._data) ; 
+
+/* Public API: constructors and destructor */
+Object* floatarr_new(TypeObject* tp, Object* args);
+FloatArrObject* floatarr_alloc(ssize_t size);
+FloatArrObject* FloatArr_New(ssize_t size);
+void floatarr_dealloc(Object* op);
 
 
 

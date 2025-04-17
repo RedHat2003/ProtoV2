@@ -6,9 +6,10 @@
 #include "Include/clinic/floatarrobj.h"
 
 
-Object* 
-floatarr_new (TypeObject* tp) {
-    Object* ob = (Object*)Object_Malloc(tp->tp_basicsize) ; 
+Object*
+floatarr_new (TypeObject* tp, Object* args) {
+    (void)args;
+    Object* ob = (Object*)Object_Malloc(tp->tp_basicsize);
     return ob;
 }
 
