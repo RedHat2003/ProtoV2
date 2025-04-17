@@ -1,27 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
-project(CoreProject C)
+cmake_minimum_required(VERSION 3.15)
+project(ProtoV2 LANGUAGES C)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
+# Place all executables in the top‐level build directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-# List your source files
-set(SOURCES
-    src/main.c
-    Hat/obmalloc.c
-    Hat/lifecycle.c
-    Hat/objimpl.c
-    Hat/refcount.c
-    Object/typeobject.c
-    Object/intarrobj.c
-    Object/tupleobj.c
-    Object/floatarrobj.c
-    Object/clinic/impl/intarrobj_impl.c
-    Object/clinic/impl/floatarrobj_impl.c
-    Object/clinic/impl/tupleobj_impl.c
-
-)
-
-# Create the executable target
-add_executable(core ${SOURCES})
-
-# Include from the project root instead of the Include folder.
-target_include_directories(core PRIVATE ${PROJECT_SOURCE_DIR})
+# Build modular components
+add_subdirectory(Hat)
+add_subdirectory(Object)
+add_subdirectory(src)
