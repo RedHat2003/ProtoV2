@@ -1,2 +1,0 @@
-/usr/bin/ar qc libhat.a CMakeFiles/hat.dir/lifecycle.c.o CMakeFiles/hat.dir/objimpl.c.o CMakeFiles/hat.dir/obmalloc.c.o CMakeFiles/hat.dir/refcount.c.o
-/usr/bin/ranlib libhat.a
