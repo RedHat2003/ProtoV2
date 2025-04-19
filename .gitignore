@@ -1,1 +1,5 @@
 .cache/
+# Ignore build artifacts and local folders
+build/
+d/
+
