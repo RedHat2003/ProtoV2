@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/hat",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/hat.dir/lifecycle.c.o -c /home/redhat/Proj/ProtoV2/hat/lifecycle.c",
+  "file": "/home/redhat/Proj/ProtoV2/hat/lifecycle.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/hat",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/hat.dir/objimpl.c.o -c /home/redhat/Proj/ProtoV2/hat/objimpl.c",
+  "file": "/home/redhat/Proj/ProtoV2/hat/objimpl.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/hat",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/hat.dir/obmalloc.c.o -c /home/redhat/Proj/ProtoV2/hat/obmalloc.c",
+  "file": "/home/redhat/Proj/ProtoV2/hat/obmalloc.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/hat",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/hat.dir/refcount.c.o -c /home/redhat/Proj/ProtoV2/hat/refcount.c",
+  "file": "/home/redhat/Proj/ProtoV2/hat/refcount.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/floatarrobj.c.o -c /home/redhat/Proj/ProtoV2/object/floatarrobj.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/floatarrobj.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/intarrobj.c.o -c /home/redhat/Proj/ProtoV2/object/intarrobj.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/intarrobj.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/tupleobj.c.o -c /home/redhat/Proj/ProtoV2/object/tupleobj.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/tupleobj.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/typeobject.c.o -c /home/redhat/Proj/ProtoV2/object/typeobject.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/typeobject.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/clinic/impl/floatarrobj_impl.c.o -c /home/redhat/Proj/ProtoV2/object/clinic/impl/floatarrobj_impl.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/clinic/impl/floatarrobj_impl.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/clinic/impl/intarrobj_impl.c.o -c /home/redhat/Proj/ProtoV2/object/clinic/impl/intarrobj_impl.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/clinic/impl/intarrobj_impl.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/object",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/object_lib.dir/clinic/impl/tupleobj_impl.c.o -c /home/redhat/Proj/ProtoV2/object/clinic/impl/tupleobj_impl.c",
+  "file": "/home/redhat/Proj/ProtoV2/object/clinic/impl/tupleobj_impl.c"
+},
+{
+  "directory": "/home/redhat/Proj/ProtoV2/build/src",
+  "command": "/usr/bin/cc  -I/home/redhat/Proj/ProtoV2/include -I/home/redhat/Proj/ProtoV2  -Wall -Wextra -pedantic -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/core.dir/main.c.o -c /home/redhat/Proj/ProtoV2/src/main.c",
+  "file": "/home/redhat/Proj/ProtoV2/src/main.c"
+}
+]

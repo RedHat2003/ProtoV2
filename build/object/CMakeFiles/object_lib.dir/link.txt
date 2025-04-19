@@ -1,0 +1,2 @@
+/usr/bin/ar qc libobject_lib.a CMakeFiles/object_lib.dir/floatarrobj.c.o CMakeFiles/object_lib.dir/intarrobj.c.o CMakeFiles/object_lib.dir/tupleobj.c.o CMakeFiles/object_lib.dir/typeobject.c.o CMakeFiles/object_lib.dir/clinic/impl/floatarrobj_impl.c.o CMakeFiles/object_lib.dir/clinic/impl/intarrobj_impl.c.o CMakeFiles/object_lib.dir/clinic/impl/tupleobj_impl.c.o
+/usr/bin/ranlib libobject_lib.a

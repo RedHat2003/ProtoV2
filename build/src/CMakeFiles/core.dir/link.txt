@@ -1,0 +1,1 @@
+/usr/bin/cc  -Wall -Wextra -pedantic -O3 -DNDEBUG CMakeFiles/core.dir/main.c.o -o ../core  ../object/libobject_lib.a ../hat/libhat.a 

@@ -3,9 +3,9 @@
 A prototype core runtime and object system implemented in C.
 
 ## Project Structure
-- `Include/` : Public headers and API definitions.
-- `Hat/`     : Low-level runtime support (memory allocation, reference counting).
-- `Object/`  : Object types and implementations (int/float arrays, tuples, type objects).
+- `include/` : Public headers and API definitions.
+- `hat/`     : Low-level runtime support (memory allocation, reference counting).
+- `object/`  : Object types and implementations (int/float arrays, tuples, type objects).
 - `src/`     : Application entry point (`main.c`).
 - `build/`   : Out-of-source build directory.
 
