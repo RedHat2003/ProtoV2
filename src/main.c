@@ -19,6 +19,8 @@ int main(void) {
     printf ("alternative is sizeof(TupleObjet) - sizeof (Object*) = %zu\n" , sizeof(TupleObject) - sizeof (Object* )) ; 
     printf("the type of iarr is %s\n" , ((TypeObject*)iarr)->ob_base.ob_base.tp_type->tp_name) ; 
     printf("the type of farr is %s\n" , ((TypeObject*)farr)->ob_base.ob_base.tp_type->tp_name) ; 
+    Array_Descr* descr = Get(0) ; 
+    printf ("the descr element size is %zu\n" , descr->elsize) ;
     Object_Dealloc(iarr) ; 
     Object_Dealloc (farr) ; 
     return 0;

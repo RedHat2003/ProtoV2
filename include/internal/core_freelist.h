@@ -6,8 +6,8 @@
 
 extern _RuntimeState _Runtime ;
 
-inline _Freelists* 
-_freelist_GET (void) { 
+static inline _Freelists*
+_freelist_GET(void) {
     return &(_Runtime.freelists);
 }
 

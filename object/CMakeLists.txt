@@ -8,6 +8,7 @@ file(GLOB OBJECT_SOURCES
 )
 file(GLOB CLINIC_SOURCES
     clinic/impl/*.c
+    clinic/array/*.c
 )
 add_library(object_lib STATIC ${OBJECT_SOURCES} ${CLINIC_SOURCES})
 target_include_directories(object_lib PUBLIC ${PROJECT_SOURCE_DIR}/include)

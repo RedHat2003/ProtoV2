@@ -9,6 +9,7 @@
 #include "clinic/intarrobj.h"
 #include "clinic/floatarrobj.h"
 #include "clinic/tupleobj.h"
+#include "clinic/ndarrayobj.h"
 
 
 #endif
