@@ -1,0 +1,123 @@
+/* Comprehensive test suite for core objects:
+ * - TypeObject properties
+ * - IntArr and FloatArr creation, element access, refcount lifecycle
+ * - Array_Descr descriptor fields and refcounting
+ * - TupleObject size API
+ */
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+#include "public.h"
+
+#define GREEN  "\x1b[32m"
+#define RESET  "\x1b[0m"
+#define PASS(msg)  printf("%s %s[passed]%s\n", (msg), GREEN, RESET)
+
+int main(void) {
+    /* TypeObject_Type tests */
+    printf("[TypeObject] Testing TypeObject_Type static initialization...\n");
+    assert(TypeObject_Type.tp_basicsize == 0);
+    assert(TypeObject_Type.tp_itemsize == 0);
+    assert(TypeObject_Type.tp_new == NULL);
+    assert(TypeObject_Type.tp_dealloc == NULL);
+    PASS("TypeObject_Type static init");
+
+    /* IntArrObject_Type tests */
+    printf("[TypeObject] Testing IntArrObject_Type...\n");
+    assert(IntArrObject_Type.tp_basicsize == IntArrObject_HEADER_SIZE);
+    assert(IntArrObject_Type.tp_itemsize == sizeof(int));
+    assert(IntArrObject_Type.tp_new == intarr_new);
+    assert(IntArrObject_Type.tp_dealloc == intarr_dealloc);
+    assert(strcmp(IntArrObject_Type.tp_name, "intarr") == 0);
+    PASS("IntArrObject_Type static init");
+
+    /* FloatArrObject_Type tests */
+    printf("[TypeObject] Testing FloatArrObject_Type...\n");
+    assert(FloatArrObject_Type.tp_basicsize == FloatArrObject_HEADER_SIZE);
+    assert(FloatArrObject_Type.tp_itemsize == sizeof(float));
+    assert(FloatArrObject_Type.tp_new == floatarr_new);
+    assert(FloatArrObject_Type.tp_dealloc == floatarr_dealloc);
+    assert(strcmp(FloatArrObject_Type.tp_name, "floatarr") == 0);
+    PASS("FloatArrObject_Type static init");
+
+    /* IntArr_New tests */
+    printf("[IntArr] Testing IntArr_New and element access...\n");
+    IntArrObject* iarr = IntArr_New(5);
+    assert(iarr != NULL);
+    /* Check refcount and size */
+    assert(((Object*)iarr)->ref_cnt == 1);
+    assert(((VarObject*)iarr)->size == 5);
+    /* Default values and assignment */
+    for (ssize_t i = 0; i < 5; i++) {
+        assert(iarr->data._data[i] == 0);
+        iarr->data._data[i] = (int)(i + 10);
+    }
+    for (int i = 0; i < 5; i++) {
+        assert(iarr->data._data[i] == i + 10);
+    }
+    PASS("IntArr_New data init and access");
+    /* Refcount cycle */
+    _INCREF((Object*)iarr);
+    assert(((Object*)iarr)->ref_cnt == 2);
+    _DECREF((Object*)iarr);
+    assert(((Object*)iarr)->ref_cnt == 1);
+    _DECREF((Object*)iarr);  /* dealloc */
+    PASS("IntArr reference count lifecycle");
+
+    /* FloatArr_New tests */
+    printf("[FloatArr] Testing FloatArr_New and element access...\n");
+    FloatArrObject* farr = FloatArr_New(4);
+    assert(farr != NULL);
+    assert(((Object*)farr)->ref_cnt == 1);
+    assert(((VarObject*)farr)->size == 4);
+    for (ssize_t i = 0; i < 4; i++) {
+        assert(farr->data._data[i] == 0.0f);
+        farr->data._data[i] = (float)(i * 2.5f);
+    }
+    for (int i = 0; i < 4; i++) {
+        assert(farr->data._data[i] == (float)(i * 2.5f));
+    }
+    PASS("FloatArr_New data init and access");
+    _INCREF((Object*)farr);
+    assert(((Object*)farr)->ref_cnt == 2);
+    _DECREF((Object*)farr);
+    assert(((Object*)farr)->ref_cnt == 1);
+    _DECREF((Object*)farr);
+    PASS("FloatArr reference count lifecycle");
+
+    /* Array_Descr tests */
+    printf("[Descr] Testing Array_Descr fields and Get()...\n");
+    Array_Descr* d1 = Get(0);
+    assert(d1 != NULL);
+    /* Static descriptor initial ref = 1; after Get -> >=2 */
+    assert(((Object*)d1)->ref_cnt >= 2);
+    assert(d1->typeobj == &IntArrObject_Type);
+    assert(d1->kind == _SIGNEDLTR && d1->type == _SIGNEDLTR);
+    assert(d1->byteorder == '=');
+    assert(d1->flags == 0 && d1->type_num == _INT);
+    assert(d1->elsize == sizeof(int));
+    assert(d1->alignment == _Alignof(int));
+    assert(d1->metadata == NULL && d1->hash == -1);
+    assert(d1->reserved_null[0] == NULL && d1->reserved_null[1] == NULL);
+    PASS("Array_Descr structure fields");
+    /* Refcount cycle */
+    size_t before = ((Object*)d1)->ref_cnt;
+    Array_Descr* d2 = Get(0);
+    assert(d2 == d1 && ((Object*)d1)->ref_cnt == before + 1);
+    _DECREF((Object*)d2);
+    _DECREF((Object*)d1);
+    PASS("Array_Descr reference count lifecycle");
+
+    /* Tuple_GET_SIZE tests */
+    printf("[Tuple] Testing Tuple_GET_SIZE API...\n");
+    TupleObject* t1 = Object_NewVar(TupleObject, &TupleObjet_Type, 3);
+    assert(t1 != NULL);
+    assert(((Object*)t1)->ref_cnt == 1);
+    assert(Tuple_GET_SIZE((Object*)t1) == 3);
+    /* Manual free since tp_dealloc is NULL */
+    Object_Free((void*)t1);
+    PASS("Tuple allocation and size API");
+
+    printf(GREEN "[ALL TESTS PASSED]" RESET "\n");
+    return 0;
+}
