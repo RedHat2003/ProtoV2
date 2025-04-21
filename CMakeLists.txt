@@ -14,3 +14,7 @@ add_subdirectory(hat)
 add_subdirectory(object)
 add_subdirectory(src)
 
+# Enable testing and include the test suite
+enable_testing()
+add_subdirectory(tests)
+
