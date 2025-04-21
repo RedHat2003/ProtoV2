@@ -101,7 +101,7 @@ int main(void) {
     assert(d1->reserved_null[0] == NULL && d1->reserved_null[1] == NULL);
     PASS("Array_Descr structure fields");
     /* Refcount cycle */
-    size_t before = ((Object*)d1)->ref_cnt;
+    ssize_t  before = ((Object*)d1)->ref_cnt;
     Array_Descr* d2 = Get(0);
     assert(d2 == d1 && ((Object*)d1)->ref_cnt == before + 1);
     _DECREF((Object*)d2);
