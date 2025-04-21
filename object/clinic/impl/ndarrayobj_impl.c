@@ -2,6 +2,9 @@
 #include "object.h"
 #include "objimpl.h"
 #include "types.h"
+#include <stdio.h>   // for fprintf()
+#include <stdlib.h>  // for abort()
+
 #include "refcount.h"
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
@@ -11,12 +14,17 @@ Array_DescrFromType(int );
 
 extern Array_LagacyDescr* _buildin_descrs[] ; 
 
-Array_Descr* 
-Get (int type ) {
-    Array_Descr* ret = (Array_Descr*)_buildin_descrs[type]; 
-    _INCREF((Object*)ret) ;  
+Array_Descr* Get(int type) {
+    if (__builtin_expect(type != NTYPES_LEGACY, 0)) {
+        fprintf(stderr, "Invalid data-type for array: %d (expected: %d)\n", type, NTYPES_LEGACY);
+        abort();  // or return NULL / error code as per your runtime
+    }
+
+    Array_Descr* ret = (Array_Descr*)_buildin_descrs[type];
+    _INCREF((Object*)ret);
     return ret;
 }
+
 
 //Object* 
 //Array_New (

@@ -9,8 +9,10 @@ enum _TYPECHAR {
     _SIGNEDLTR = 'i', 
 };
 enum _TYPES {
-    _INT = 7 
+    _INT = 7 ,  
+    NTYPES_LEGACY=0,
 };
+
 typedef struct _Array_Descr {
     Object_HEAD 
     TypeObject* typeobj ; 
@@ -37,7 +39,6 @@ typedef struct {
     Object* names ;
     // NpyAuxData *c_metadata; 
 }Array_LagacyDescr ; 
-
 Array_Descr* Get(int ) ; 
 
 #endif

@@ -21,6 +21,8 @@ Array_LagacyDescr INT_Descr = {
     },
 }; 
 
+// NOTE: If new types are added to _buildin_descrs[], 
+// increment NTYPES_LEGACY accordingly to reflect the total count.
 Array_LagacyDescr* _buildin_descrs[] = {
     &INT_Descr
 }; 
