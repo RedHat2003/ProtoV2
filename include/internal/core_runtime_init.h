@@ -13,7 +13,7 @@
       .freelists = {                                      \
           .tuple_iters = {                                \
               .freelist = NULL,                           \
-              .size     = 9999                            \
+              .size     = 0                               \
           },                                              \
       },                                                  \
     }

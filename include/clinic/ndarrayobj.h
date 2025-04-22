@@ -57,4 +57,12 @@ typedef struct tagArrayObject_fields {
     int flags ; 
     Object* weekreflist ; // maybe i would change it to tuple latter 
 }ArrayObject_fields;
+
+
+Object* 
+Array_New (
+        TypeObject* subtype, int nd , ssize_t const* dims , int type_num ,
+        ssize_t const* strides ,void* data, int flags,
+        Object* obj) ; 
+
 #endif

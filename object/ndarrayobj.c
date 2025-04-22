@@ -2,8 +2,19 @@
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
 
+#include <stdlib.h>
+#include "mem.h"
+
 #include "types.h"
 
+
+static void ndarray_dealloc(Object *op) {
+    ArrayObject_fields *fa = (ArrayObject_fields *)op;
+    if (fa->data) {
+        free(fa->data);
+    }
+    Object_Free(op);
+}
 
 TypeObject ArrayObject_Type = {
     .ob_base = {
@@ -16,6 +27,6 @@ TypeObject ArrayObject_Type = {
     .tp_basicsize = sizeof (ArrayObject_fields) ,
     .tp_name = "ndarray" , 
     .tp_alloc = Type_GenericAlloc,
-    .tp_dealloc = NULL 
+    .tp_dealloc = ndarray_dealloc
     
 };

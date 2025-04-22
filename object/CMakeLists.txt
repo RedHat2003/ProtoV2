@@ -5,6 +5,7 @@ file(GLOB OBJECT_SOURCES
     intarrobj.c
     tupleobj.c
     floatarrobj.c
+    ndarrayobj.c
 )
 file(GLOB CLINIC_SOURCES
     clinic/impl/*.c

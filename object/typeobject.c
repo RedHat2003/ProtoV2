@@ -11,10 +11,9 @@ Type_AllocNoTrack(TypeObject* type, ssize_t nitems) {
     ssize_t size = Object_Var_SIZE(type , nitems + 1) ; 
     const size_t presize =  0 ; // its just 0 until because there is no GC support until this moment .
     char* alloc = _Object_MallocWithType(type , size + presize) ;  
-    obj = (Object*)(alloc + presize) ; 
-    memset((char*)obj + sizeof(Object),
-           0,
-           size - sizeof(Object));
+    obj = (Object*)(alloc + presize);
+    /* Zero entire object memory (including header) */
+    memset((char*)obj, 0, size);
 
     if (type->tp_itemsize == 0) {
         Object_Init(obj, type);
