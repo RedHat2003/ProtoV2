@@ -48,7 +48,7 @@ int main(void) {
 
     /* --- new Array_New call for a 1×10 zeroed array --- */
     ssize_t dims[1] = { 10 };
-    Object *arr = Array_New(
+    ArrayObject_fields* arr = (ArrayObject_fields* )Array_New(
         /* subtype  */ &ArrayObject_Type,
         /* nd       */ 1,
         /* dims     */ dims,
@@ -63,12 +63,9 @@ int main(void) {
         return 1;
     }
 
-    printf(
-      "the type of arr  is %s\n",
-      ((TypeObject*)arr)->ob_base.ob_base.tp_type->tp_name
-    );
-
+    printf ("the ndim is %d\n" , arr->nd) ; 
     Object_Dealloc(arr);
+
     return 0;
 }
 
