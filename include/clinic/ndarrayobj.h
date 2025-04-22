@@ -41,4 +41,20 @@ typedef struct {
 }Array_LagacyDescr ; 
 Array_Descr* Get(int ) ; 
 
+
+
+typedef struct tagArrayObject_fields {
+    Object_HEAD
+    char* data ; 
+    int nd ;
+    /*
+     * Number of bytes to jump to get to the
+     * next element in each dimension
+     */
+    ssize_t strides ; 
+    Object* base ; 
+    Array_Descr* descr ; 
+    int flags ; 
+    Object* weekreflist ; // maybe i would change it to tuple latter 
+}ArrayObject_fields;
 #endif

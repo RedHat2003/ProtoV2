@@ -10,6 +10,9 @@ struct typeobject {
     ssize_t tp_basicsize , tp_itemsize ; 
     newfunc tp_new ; 
     destructor tp_dealloc ; 
+    allocfunc tp_alloc ; 
 };
 
+Object* 
+Type_GenericAlloc (TypeObject* tp , ssize_t nitems) ;  
 #endif
