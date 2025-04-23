@@ -1,6 +1,7 @@
+
+
 #ifndef OBJECT_IMPL_H
 #define OBJECT_IMPL_H
-
 #ifdef __cplusplus
 extern "C" {
 #endif

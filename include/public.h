@@ -2,6 +2,7 @@
 #define PUBLIC_h
 
 #include "mem.h"
+#include "types.h"
 #include "object.h"
 #include "objimpl.h"
 #include "refcount.h"

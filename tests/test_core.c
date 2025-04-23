@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "public.h"
-#include "types.h"
 #define GREEN  "\x1b[32m"
 #define RESET  "\x1b[0m"
 #define PASS(msg)  printf("%s %s[passed]%s\n", (msg), GREEN, RESET)

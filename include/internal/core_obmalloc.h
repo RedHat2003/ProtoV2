@@ -10,6 +10,7 @@ void* Object_Malloc (ssize_t) ;
 
 void* 
 _Object_MallocWithType (TypeObject* tp , ssize_t size) {
+    (void)tp ; 
     void* mem = Object_Malloc(size) ; 
     return mem;
 }

@@ -16,7 +16,8 @@ _Object_Var_SIZE(TypeObject* tp, ssize_t nitem) {
     return size;
 }
 
-#define TYPE_INCREF(ob) _INCREF(ob)
+
+#define TYPE_INCREF(tp)  _INCREF((Object *)(tp))
 
 void 
 _SET_TYPE(Object* ob, TypeObject* tp) {
@@ -28,13 +29,24 @@ _SET_SIZE(VarObject* vob, ssize_t size) {
     vob->size = size;
 }
 
-void 
-_Object_Init(Object* ob, TypeObject* tp) {
-    _SET_TYPE(ob, tp);
-    TYPE_INCREF(ob);
-    _NEWREF(ob) ;
-    // new reference would be here //
+
+
+/*-- helpers --*/
+
+void _Object_Init(Object *ob, TypeObject *tp)
+{
+    _NEWREF(ob);        /* 1️⃣ ابدأ بعدّاد = 1 للكائن الجديد */
+    _SET_TYPE(ob, tp);  /* 2️⃣ ثبّت نوعه */
+    TYPE_INCREF(tp);    /* 3️⃣ زد عدّاد النوع نفسه */
 }
+
+
+
+
+
+
+
+
 
 void 
 _Object_Var_Init(VarObject* vob, TypeObject* tp, ssize_t size) {
