@@ -1,11 +1,7 @@
 #include <stdio.h>
-#include "object.h"
-#include "objimpl.h"
-
+#include "public.h"
 void _INCREF(Object* ob) {
-    printf ("ref count were %zu ",ob->ref_cnt) ; 
     ob->ref_cnt++ ; 
-    printf ("but now %zu\n" , ob->ref_cnt) ; 
 }
 
 void _DECREF(Object* op) {

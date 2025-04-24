@@ -8,7 +8,10 @@ ssize_t
 _Object_SIZE(TypeObject* tp) {
     return tp->tp_basicsize;
 }
-
+ssize_t 
+_Object_refcnt (Object* ob) {
+    return ob->ref_cnt;
+}
 ssize_t
 _Object_Var_SIZE(TypeObject* tp, ssize_t nitem) {
     ssize_t size = _Object_SIZE(tp);

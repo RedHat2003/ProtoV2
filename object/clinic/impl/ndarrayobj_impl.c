@@ -6,6 +6,7 @@
 #include <stdlib.h>  // for abort()
 #include <string.h>
 #include "refcount.h"
+#include "public.h"
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
 
@@ -13,6 +14,24 @@ Array_Descr*
 Array_DescrFromType(int ); 
 
 extern Array_LagacyDescr* _buildin_descrs[] ; 
+
+
+/* Private options for NewFromDescriptor */
+typedef enum {
+    /*
+     * Indicate the array should be zeroed, we may use calloc to do so
+     * (otherwise much like ).
+     */
+    _NPY_ARRAY_ZEROED = 1 << 0,
+    /* Whether to allow empty strings (implied by ensure dtype identity) */
+    _NPY_ARRAY_ALLOW_EMPTY_STRING = 1 << 1,
+    /*
+     * If we take a view into an existing array and use its dtype, then that
+     * dtype must be preserved (for example for subarray and S0, but also
+     * possibly for future dtypes that store more metadata).
+     */
+    _NPY_ARRAY_ENSURE_DTYPE_IDENTITY = 1 << 2,
+} _NPY_CREATION_FLAGS;
 
 Array_Descr* Get(int type) {
     if (__builtin_expect(type != NTYPES_LEGACY, 0)) {
@@ -25,79 +44,39 @@ Array_Descr* Get(int type) {
     return ret;
 }
 
-
-Object *
+ 
+Object* 
 Array_NewFromDescr_int(
-    TypeObject       *subtype,
-    Array_Descr      *descr,
-    int               nd,
-    ssize_t   const *dims,
-    ssize_t   const *strides,
-    void             *data,
-    int               flags,
-    Object           *obj,    // unused
-    Object           *base,   // stored but not otherwise used
-    int               cflags) // unused
-{
-    ArrayObject_fields *fa;
-    size_t               nbytes;
-    ssize_t              length;
+      TypeObject* subtype , Array_Descr* descr ,int nd ,
+      ssize_t const* dims , ssize_t const* strides , void* data ,
+      int flags , Object* obj , Object* base , _NPY_CREATION_FLAGS cflags ){
+    
+    ArrayObject_fields* fa ; 
+    ssize_t nbytes ; 
+    
+    if (nd > MAXDIMS || nd < 0 ) {
+       //ref dec of descr 
+       return NULL ;
+    }
+    nbytes = descr->elsize ; 
 
-    /* silence unused-parameter warnings */
-    (void)obj;
-    (void)cflags;
+    fa = (ArrayObject_fields* )subtype->tp_alloc(subtype , 0 ) ; 
 
-    /* 1) only 1‑D arrays supported */
-    if (nd != 1) {
-        fprintf(stderr, "Array_New: only 1‑D arrays supported (nd=%d)\n", nd);
+    if (fa ==NULL ) {
+        //ref dec of descr 
         return NULL;
     }
 
-    /* 2) compute total bytes */
-    length = dims[0];
-    if (length < 0) {
-        fprintf(stderr, "Array_New: negative dimension %zd\n", length);
-        return NULL;
-    }
-    nbytes = (size_t)length * descr->elsize;
+    fa->nd = nd ; 
+    fa->dimensions = NULL ; 
+    fa->weakreflist = NULL ; 
+    fa->data = NULL ; 
 
-    /* 3) allocate the header */
-    fa = (ArrayObject_fields *)subtype->tp_alloc(subtype, 0);
-    if (fa == NULL) {
-        return NULL;
-    }
+    return (Object* )fa ; 
 
-    /* 4) fill core fields */
-    fa->nd          = nd;
-    fa->descr       = descr;
-    fa->flags       = flags;
-    fa->base        = base;
-    fa->weekreflist = NULL;
-
-    /* 5) allocate or attach data buffer */
-    if (data) {
-        fa->data = (char*)data;
-    }
-    else {
-        size_t alloc_size = nbytes ? nbytes : 1;
-        fa->data = malloc(alloc_size);
-        if (!fa->data) {
-            free(fa);
-            return NULL;
-        }
-        memset(fa->data, 0, alloc_size);
-    }
-
-    /* 6) set stride */
-    if (strides) {
-        fa->strides = strides[0];
-    }
-    else {
-        fa->strides = descr->elsize;
-    }
-
-    return (Object*)fa;
+    
 }
+
 
 Object *
 Array_NewFromDescrAndBase(

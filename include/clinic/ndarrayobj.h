@@ -5,6 +5,11 @@
 #include "objhelper.h"
 #include "clinic/tpobject.h"
 
+#define MAXDIMS 64 
+#define MAXDIMS_LEGACY_ITERS 32
+#define FAIL 0
+#define SUCCEED 1
+
 enum _TYPECHAR {
     _SIGNEDLTR = 'i', 
 };
@@ -47,6 +52,7 @@ typedef struct tagArrayObject_fields {
     Object_HEAD
     char* data ; 
     int nd ;
+    ssize_t* dimensions ;
     /*
      * Number of bytes to jump to get to the
      * next element in each dimension
@@ -55,7 +61,7 @@ typedef struct tagArrayObject_fields {
     Object* base ; 
     Array_Descr* descr ; 
     int flags ; 
-    Object* weekreflist ; // maybe i would change it to tuple latter 
+    Object* weakreflist ; // maybe i would change it to tuple latter 
 }ArrayObject_fields;
 
 
