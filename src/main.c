@@ -21,7 +21,7 @@ int main(void) {
     IntArrObject* iarr = IntArr_New(10);
     FloatArrObject* farr = FloatArr_New(10);
 
-    _Freelists* fl = _freelist_GET();
+    _Freelists* fl = _freelists_GET();
     printf("the number is %zu\n", fl->tuple_iters.size);
     printf(
       "the tp_basicsize = %zu\n",

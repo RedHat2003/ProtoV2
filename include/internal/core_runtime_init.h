@@ -10,7 +10,7 @@
       .allocators = {                                     \
           .standard    = _mem_allocators_standard_INIT(), \
       },                                                  \
-      .freelists = {                                      \
+      .Freelists = {                                      \
           .tuple_iters = {                                \
               .freelist = NULL,                           \
               .size     = 0                               \

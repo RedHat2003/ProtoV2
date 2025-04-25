@@ -12,6 +12,7 @@ struct _freelist {
 }; 
 
 typedef struct {
+    struct _freelist tuples[Tuple_MAXSAVESIZE] ; 
     struct _freelist tuple_iters ; 
 }_Freelists;
 
