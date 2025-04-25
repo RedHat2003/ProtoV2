@@ -71,7 +71,7 @@ Array_NewFromDescr_int(
     fa->dimensions = NULL ; 
     fa->weakreflist = NULL ; 
     fa->data = NULL ; 
-
+    
     return (Object* )fa ; 
 
     
