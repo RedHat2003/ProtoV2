@@ -15,6 +15,8 @@ void _Object_Var_Init(VarObject* vob, TypeObject* tp, ssize_t size);
 VarObject* _Object_NewVar(TypeObject* tp , ssize_t nitem) ; 
 void _Object_Dealloc (Object* op) ; 
 ssize_t _Object_refcnt (Object* ob ) ; 
+ssize_t _Get_VarSize(VarObject* vob) ; 
+char* _Get_ObjType(Object* ob) ; 
 #define Object_refcnt(op) _Object_refcnt((Object*)op)
 #define Object_SIZE(tp) _Object_SIZE(tp)
 #define Object_Var_SIZE(tp, n) _Object_Var_SIZE((tp), (n))
@@ -22,6 +24,10 @@ ssize_t _Object_refcnt (Object* ob ) ;
 #define Object_Var_Init(ob, tp, s) _Object_Var_Init((VarObject* )ob, (tp), (s))
 #define Object_NewVar(type, tp, n) (type* )_Object_NewVar((tp), (n)) 
 #define Object_Dealloc(op) _Object_Dealloc((Object* )op) ; 
+#define Get_VarSize(op) \
+    _Get_VarSize((VarObject* )op)
+#define Get_ObjType(op) \
+    _Get_ObjType((Object* )op)
 #ifdef __cplusplus
 }
 #endif

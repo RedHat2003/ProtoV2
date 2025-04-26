@@ -21,4 +21,8 @@ Object* intarr_new(TypeObject* tp, Object* args);
 IntArrObject* intarr_alloc(ssize_t size);
 IntArrObject* IntArr_New(ssize_t size);
 void intarr_dealloc(Object* op);
+int* intarr_data (Object* ob) ; 
+
+#define IntArr_Data(op) \
+    intarr_data((Object*)op)
 #endif

@@ -63,3 +63,9 @@ IntArr_New(ssize_t size)
     return op;
 }
 
+int * 
+intarr_data (Object* ob) {
+    IntArrObject* op = _CAST(IntArrObject*,ob) ; 
+    int* data = &(op->data._data[0]) ; 
+    return data ;
+}

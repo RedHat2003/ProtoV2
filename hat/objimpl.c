@@ -18,7 +18,12 @@ _Object_Var_SIZE(TypeObject* tp, ssize_t nitem) {
     size += nitem * tp->tp_itemsize;
     return size;
 }
+const char* 
 
+_Get_ObjType(Object* ob){
+    TypeObject* tp = ob->tp_type ; 
+    return tp->tp_name;
+}
 
 #define TYPE_INCREF(tp)  _INCREF((Object *)(tp))
 
@@ -71,7 +76,13 @@ _Object_NewVar(TypeObject* tp , ssize_t nitem) {
 
 void 
 _Object_Dealloc (Object* op) {
-    TypeObject* type = Object_TYPE(op) ;
+    TypeObject* type = op->tp_type ;
     destructor dealloc = type->tp_dealloc ; 
     (*dealloc)(op) ; 
 }
+
+ssize_t 
+_Get_VarSize(VarObject* vob) {
+    return vob->size;
+}
+

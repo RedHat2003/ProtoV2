@@ -2,25 +2,69 @@
 #include "objimpl.h"
 #include "public.h"
 #include "internal/core_freelist_state.h"
-
 #include "internal/core_freelist.h"
 #include "internal/core_tuple.h"
 
-int main (void) {
-    TupleObject* t1 = Object_NewVar(TupleObject, &TupleObjet_Type, 3);
-    TupleObject* t2 = Object_NewVar(TupleObject, &TupleObjet_Type, 10);
-    printf ("the ref count of t1 , t2 is %zu , %zu\n" , Object_refcnt(t1) , Object_refcnt(t2));
-    printf ("the size of tuple_iters %zu\n" ,_FREELIST_SIZE(tuple_iters) ) ; 
-    ssize_t index = t1->ob_base.size - 1 ; 
-    int status = _FREELIST_PUSH(tuples[index], t1, tuple_MAXFREELIST) ;  
-    if (status) {
-        printf("pushed ! \n") ; 
+int main(void) {
+    /* Allocate first IntArrObject */
+    IntArrObject* iarr1 = IntArr_New(5);
+
+    /* Initialize iarr1 with sequential values */
+    ssize_t len1 = Get_VarSize(iarr1);
+    int* iarr1data = IntArr_Data(iarr1);
+
+    for (ssize_t i = 0; i < len1; i++) {
+        iarr1data[i] = (int)i;
     }
-    else {
-        return 0;
+
+    printf("iarr1 -> object of type: %s\n", Get_ObjType(iarr1));
+    printf("\tData: ");
+    for (ssize_t i = 0; i < len1; i++) {
+        printf("%d ", iarr1data[i]);
     }
-    TupleObject* t_frompush = _FREELIST_POP(TupleObject, tuples[index]) ; 
-    printf ("the size from pushed is %zu\n" , t_frompush->ob_base.size) ; 
-    Object_Free(t2) ; 
+    printf("\n\n");
+
+    /* Deallocate iarr1 (should push to freelist) */
+    intarr_dealloc((Object*)iarr1);
+
+    /* Allocate second IntArrObject (should reuse freelist) */
+    IntArrObject* iarr2 = IntArr_New(5);
+
+    /* Verify that iarr2 has the same layout and data */
+    ssize_t len2 = Get_VarSize(iarr2);
+    int* iarr2data = IntArr_Data(iarr2);
+
+    printf("iarr2 -> object of type: %s\n", Get_ObjType(iarr2));
+    printf("\tData: ");
+    for (ssize_t i = 0; i < len2; i++) {
+        printf("%d ", iarr2data[i]);
+    }
+    printf("\n\n");
+
+    /* Check consistency */
+    if (len1 == len2) {
+        printf("Lengths match: %zd elements.\n", len1);
+    } else {
+        printf("Length mismatch: iarr1=%zd, iarr2=%zd\n", len1, len2);
+    }
+
+    int mismatch = 0;
+    for (ssize_t i = 0; i < len1; i++) {
+        if (iarr1data[i] != iarr2data[i]) {
+            mismatch = 1;
+            break;
+        }
+    }
+
+    if (!mismatch) {
+        printf("Data matches perfectly after freelist reuse.\n");
+    } else {
+        printf("Data mismatch after freelist reuse!\n");
+    }
+
+    /* Manual cleanup */
+    Object_Free(iarr2);
+
     return 0;
 }
+
