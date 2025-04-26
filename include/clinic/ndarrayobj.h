@@ -11,6 +11,17 @@
 #define FAIL 0
 #define SUCCEED 1
 
+
+#define ARRAY_ALIGNED         0x0100
+#define ARRAY_WRITEABLE       0x0400
+
+
+#define ARRAY_C_CONTIGUOUS    0x0001
+// ARRAY_F_CONTIGUOUS  May be latter 
+
+
+
+
 enum _TYPECHAR {
     _SIGNEDLTR = 'i', 
 };
