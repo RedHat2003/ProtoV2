@@ -10,16 +10,16 @@ int main(void) {
     IntArrObject* iarr1 = IntArr_New(5);
 
     /* Initialize iarr1 with sequential values */
-    ssize_t len1 = Get_VarSize(iarr1);
+    int len1 = (int)Get_VarSize(iarr1);
     int* iarr1data = IntArr_Data(iarr1);
 
-    for (ssize_t i = 0; i < len1; i++) {
-        iarr1data[i] = (int)i;
+    for (int i = 0; i < len1; i++) {
+        iarr1data[i] = i;
     }
 
     printf("iarr1 -> object of type: %s\n", Get_ObjType(iarr1));
     printf("\tData: ");
-    for (ssize_t i = 0; i < len1; i++) {
+    for (int i = 0; i < len1; i++) {
         printf("%d ", iarr1data[i]);
     }
     printf("\n\n");
@@ -31,25 +31,24 @@ int main(void) {
     IntArrObject* iarr2 = IntArr_New(5);
 
     /* Verify that iarr2 has the same layout and data */
-    ssize_t len2 = Get_VarSize(iarr2);
+    int len2 = (int)Get_VarSize(iarr2);
     int* iarr2data = IntArr_Data(iarr2);
 
     printf("iarr2 -> object of type: %s\n", Get_ObjType(iarr2));
     printf("\tData: ");
-    for (ssize_t i = 0; i < len2; i++) {
+    for (int i = 0; i < len2; i++) {
         printf("%d ", iarr2data[i]);
     }
     printf("\n\n");
 
-    /* Check consistency */
     if (len1 == len2) {
-        printf("Lengths match: %zd elements.\n", len1);
+        printf("Lengths match: %d elements.\n", len1);
     } else {
-        printf("Length mismatch: iarr1=%zd, iarr2=%zd\n", len1, len2);
+        printf("Length mismatch: iarr1=%d, iarr2=%d\n", len1, len2);
     }
 
     int mismatch = 0;
-    for (ssize_t i = 0; i < len1; i++) {
+    for (int i = 0; i < len1; i++) {
         if (iarr1data[i] != iarr2data[i]) {
             mismatch = 1;
             break;
@@ -62,9 +61,21 @@ int main(void) {
         printf("Data mismatch after freelist reuse!\n");
     }
 
-    /* Manual cleanup */
     Object_Free(iarr2);
 
+    /* Test Array_New */
+    int dims[3] = {2, 3, 4};
+    Object* ndarr = Array_New(&ArrayObject_Type, 3, dims, 0, NULL, NULL, 0, NULL);
+    if (ndarr != NULL) {
+        printf("Array_New allocation succeeded.\n");
+    } else {
+        printf("Array_New allocation failed.\n");
+    }
+    ArrayObject_fields* fa = (ArrayObject_fields* )ndarr ; 
+    for (int i = 0 ; i < fa->nd ; i++) {
+        printf ("%d " , fa->layout->data._data[i]) ; 
+    }
+    printf("\n") ; 
     return 0;
 }
 
