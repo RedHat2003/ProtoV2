@@ -1,9 +1,3 @@
-/* Comprehensive test suite for core objects:
- * - TypeObject properties
- * - IntArr and FloatArr creation, element access, refcount lifecycle
- * - Array_Descr descriptor fields and refcounting
- * - TupleObject size API
- */
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -60,8 +54,42 @@ int main(void) {
     assert(((Object*)iarr)->ref_cnt == 2);
     _DECREF((Object*)iarr);
     assert(((Object*)iarr)->ref_cnt == 1);
-    _DECREF((Object*)iarr);  /* dealloc */
+    _DECREF((Object*)iarr);  /* dealloc & push to freelist */
     PASS("IntArr reference count lifecycle");
+
+    /* Freelist reuse test */
+    printf("[IntArr Freelist] Testing freelist reuse...\n");
+    IntArrObject* r1 = IntArr_New(3);
+    for (ssize_t i = 0; i < 3; ++i) {
+        r1->data._data[i] = (int)(i + 20);
+    }
+    _INCREF((Object*)r1);
+    assert(((Object*)r1)->ref_cnt == 2);
+    _DECREF((Object*)r1);
+    assert(((Object*)r1)->ref_cnt == 1);
+    _DECREF((Object*)r1);  /* dealloc & push to freelist[2] */
+    IntArrObject* r2 = IntArr_New(3);
+    assert(r2 == r1);
+    PASS("IntArr freelist reuse");
+
+    /* Raw-data retention on pop */
+    printf("[IntArr Freelist] Testing raw-data retention on pop...\n");
+    /* Allocate, fill unique pattern, and push */
+    IntArrObject* r3 = IntArr_New(4);
+    for (ssize_t i = 0; i < 4; ++i) {
+        r3->data._data[i] = (int)(i * 7);
+    }
+    _DECREF((Object*)r3);  /* dealloc & push to freelist[3] */
+    /* Pop raw, bypassing zero-init */
+    IntArrObject* r4 = intarr_alloc(4);
+    assert(r4 == r3);
+    for (ssize_t i = 0; i < 4; ++i) {
+        printf("popped data[%zd] = %d\n", i, r4->data._data[i]);
+        assert(r4->data._data[i] == (int)(i * 7));
+    }
+    PASS("IntArr raw-data retention on pop");
+    /* Clean up raw pop object */
+    _DECREF((Object*)r4);
 
     /* FloatArr_New tests */
     printf("[FloatArr] Testing FloatArr_New and element access...\n");
@@ -88,7 +116,6 @@ int main(void) {
     printf("[Descr] Testing Array_Descr fields and Get()...\n");
     Array_Descr* d1 = Get(0);
     assert(d1 != NULL);
-    /* Static descriptor initial ref = 1; after Get -> >=2 */
     assert(((Object*)d1)->ref_cnt >= 2);
     assert(d1->typeobj == &IntArrObject_Type);
     assert(d1->kind == _SIGNEDLTR && d1->type == _SIGNEDLTR);
@@ -99,8 +126,7 @@ int main(void) {
     assert(d1->metadata == NULL && d1->hash == -1);
     assert(d1->reserved_null[0] == NULL && d1->reserved_null[1] == NULL);
     PASS("Array_Descr structure fields");
-    /* Refcount cycle */
-    ssize_t  before = ((Object*)d1)->ref_cnt;
+    ssize_t before = ((Object*)d1)->ref_cnt;
     Array_Descr* d2 = Get(0);
     assert(d2 == d1 && ((Object*)d1)->ref_cnt == before + 1);
     _DECREF((Object*)d2);
@@ -113,7 +139,6 @@ int main(void) {
     assert(t1 != NULL);
     assert(((Object*)t1)->ref_cnt == 1);
     assert(Tuple_GET_SIZE((Object*)t1) == 3);
-    /* Manual free since tp_dealloc is NULL */
     Object_Free((void*)t1);
     PASS("Tuple allocation and size API");
 
