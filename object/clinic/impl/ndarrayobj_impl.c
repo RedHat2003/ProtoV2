@@ -41,7 +41,13 @@ Array_NewFromDescr_int(
     
     ArrayObject_fields* fa ; 
     int nbytes ; 
-    
+    // Explicitly mark variables as unused to prevent compiler warnings
+    (void)nbytes;
+    (void)strides;
+    (void)obj;
+    (void)base;
+    (void)cflags;
+
     if (nd > MAXDIMS || nd < 0 ) {
        return NULL ;
     }
@@ -60,7 +66,7 @@ Array_NewFromDescr_int(
     if (data ==NULL) {
         fa->flags = ARRAY_DEFAULT ; 
         if (flags) {
-            
+           flags = ARRAY_C_CONTIGUOUS ; 
         }
     }
     
