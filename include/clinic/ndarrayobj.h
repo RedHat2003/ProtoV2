@@ -15,8 +15,15 @@
 #define ARRAY_ALIGNED         0x0100
 #define ARRAY_WRITEABLE       0x0400
 
+#define ARRAY_BEHAVED (ARRAY_ALIGNED | \
+                       ARRAY_WRITEABLE)
 
 #define ARRAY_C_CONTIGUOUS    0x0001
+
+
+#define ARRAY_DEFAULT (ARRAY_BEHAVED | \
+                       ARRAY_C_CONTIGUOUS) // i made the C_CON as default 
+
 // ARRAY_F_CONTIGUOUS  May be latter 
 
 

@@ -57,6 +57,12 @@ Array_NewFromDescr_int(
     fa->layout = NULL ;
     fa->weakreflist = NULL ; 
     fa->data = NULL ; 
+    if (data ==NULL) {
+        fa->flags = ARRAY_DEFAULT ; 
+        if (flags) {
+            
+        }
+    }
     
     if (nd > 0) {
         fa->layout = IntArr_New(nd * 2) ; 
@@ -66,6 +72,7 @@ Array_NewFromDescr_int(
         for (int i =0 ; i <nd ; i++) {
             fa->layout->data._data[i] = dims[i] ; 
         }
+
     }
     
     return (Object* )fa ; 
