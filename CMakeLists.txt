@@ -12,7 +12,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 add_subdirectory(hat)
 add_subdirectory(object)
-add_subdirectory(src)
 
 # Enable testing and include the test suite
 enable_testing()
