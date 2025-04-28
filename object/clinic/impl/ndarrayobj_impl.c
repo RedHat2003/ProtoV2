@@ -15,7 +15,7 @@
 Array_Descr* 
 Array_DescrFromType(int ); 
 
-extern Array_LagacyDescr* _buildin_descrs[] ; 
+extern Array_Descr* _buildin_descrs[] ; 
 
 /* Private options for NewFromDescriptor */
 typedef enum {
@@ -24,13 +24,9 @@ typedef enum {
     _NPY_ARRAY_ENSURE_DTYPE_IDENTITY = 1 << 2,
 } _NPY_CREATION_FLAGS;
 
-Array_Descr* Get(int type) {
-    if (__builtin_expect(type != NTYPES_LEGACY, 0)) {
-        fprintf(stderr, "Invalid data-type for array: %d (expected: %d)\n", type, NTYPES_LEGACY);
-        abort();
-    }
+Array_Descr* Array_DescrFromType(int type) {
 
-    Array_Descr* ret = (Array_Descr*)_buildin_descrs[type];
+    Array_Descr* ret = _buildin_descrs[type];
     _INCREF((Object*)ret);
     return ret;
 }
@@ -122,8 +118,4 @@ Array_New (
     return new;
 }
 
-Array_Descr*
-Array_DescrFromType(int type) {
-    return Get(type);
-}
 

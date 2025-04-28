@@ -9,14 +9,12 @@ Array_DTypeMeta _ArrayDescr_MetaType = {
                     .ref_cnt = 1 ,
                     .tp_type = &TypeObject_Type 
             },
-            .size = sizeof (Array_Descr) 
+            .size = 0   
         },
         .tp_name = "dtype"  ,
    }, 
-   .singleton = NULL , 
-   .type_num = -1 ,
    .scalar_type = NULL ,
-   .flags = 1 << 1 
+   .dt_slots = NULL 
 };
 
 
