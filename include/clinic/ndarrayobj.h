@@ -4,8 +4,8 @@
 #include "object.h"
 #include "objhelper.h"
 #include "clinic/tpobject.h"
-#include "array_core/arraydescr.h"
-#include "array_core/arrayflags.h"
+#include "ndarray/ndarray_descr.h"
+#include "ndarray/ndarray_flags.h"
 
 
 #define MAXDIMS 64 

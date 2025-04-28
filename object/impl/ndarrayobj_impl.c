@@ -9,7 +9,7 @@
 #include "public.h"
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
-#include "clinic/array_core/array_helpers.h"
+#include "clinic/ndarray/ndarray_helpers.h"
 
 
 

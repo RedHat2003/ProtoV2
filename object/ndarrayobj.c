@@ -7,14 +7,27 @@
 
 #include "types.h"
 
-
-static void ndarray_dealloc(Object *op) {
+static void ndarray_dealloc(Object *op)
+{
     ArrayObject_fields *fa = (ArrayObject_fields *)op;
-    if (fa->data) {
-        free(fa->data);
+
+    /* release data buffer only if this ndarray owns it */
+    if (fa->data && fa->base == NULL) {
+        free(fa->data);            /* data came from plain malloc */
     }
+
+    /* release dims/strides block allocated with Object_Malloc */
+    if (fa->dimensions) {
+        Object_Free(fa->dimensions);
+    }
+
+    /* DECREF other referenced objects when you add them */
+    /* … */
+
+    /* free the ndarray struct itself (Object_Malloc) */
     Object_Free(op);
 }
+
 
 TypeObject ArrayObject_Type = {
     .ob_base = {

@@ -1,6 +1,6 @@
 #include "objimpl.h"
 #include "public.h"
-#include "array_api.h"
+#include "clinic/array_api.h"
 #include <stdio.h>
 
 

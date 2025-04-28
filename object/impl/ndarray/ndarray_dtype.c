@@ -1,5 +1,5 @@
 #include "types.h"
-#include "clinic/array_core/arraydescr.h"
+#include "clinic/ndarray/ndarray_descr.h"
 
 Array_Descr INT_Descr = {
     .ob_base = {
