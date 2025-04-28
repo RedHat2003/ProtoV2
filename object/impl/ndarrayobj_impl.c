@@ -9,6 +9,7 @@
 #include "public.h"
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
+#include "clinic/array_core/array_helpers.h"
 
 
 
@@ -72,12 +73,21 @@ Array_NewFromDescr_int(
         data = NULL ; 
         //just for this moment ! 
     }
+
+    if (nd > 0 ) {
+        fa->dimensions = (ssize_t* )dim_alloc(2 * nd) ; 
+        fa->strides = fa->dimensions + nd ; 
+
+        for (int i = 0 ; i <nd ; i++) {
+            fa->dimensions[i] = dims[i] ; 
+        }
+    }
     
 
     fa->descr = descr ; 
     fa->base = (Object* )NULL ; 
     fa->weakreflist = (Object* )NULL ; 
-    
+     
     
     return (Object* )fa ; 
 }

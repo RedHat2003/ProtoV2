@@ -1,11 +1,10 @@
 #include "types.h"
-#include "clinic/ndarrayobj.h"
-#include "internal/array_internals/_core/descriptor.h"
+#include "clinic/array_core/arraydescr.h"
 
 Array_Descr INT_Descr = {
     .ob_base = {
         .ref_cnt = 1 ,
-        .tp_type = ArrayDescr_MetaType 
+        .tp_type = NULL  
     },
     .typeobj = NULL ,
     .flags = 0 ,
