@@ -69,6 +69,10 @@ Array_NewFromDescr_int(
            flags = ARRAY_C_CONTIGUOUS ; 
         }
     }
+    else {
+        data = NULL ; 
+        //just for this moment ! 
+    }
     
     if (nd > 0) {
         fa->layout = IntArr_New(nd * 2) ; 
@@ -80,6 +84,10 @@ Array_NewFromDescr_int(
         }
 
     }
+    fa->descr = descr ; 
+    fa->base = (Object* )NULL ; 
+    fa->weakreflist = (Object* )NULL ; 
+
     
     return (Object* )fa ; 
 }

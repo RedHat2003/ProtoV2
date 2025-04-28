@@ -1,4 +1,3 @@
-#include "clinic/intarrobj.h"
 #include "public.h"
 #include "internal/core_freelist.h"
 #include "internal/core_freelist_state.h"
@@ -25,16 +24,16 @@ static int test_freelist_reuse(void) {
     void* addr2 = (void*)iarr2;
     intarr_dealloc((Object*)iarr2);
 
-    // Pass if both allocations reused the same address
     return addr1 == addr2;
 }
 
 int main(void) {
+    printf("Test freelist reuse ");
     if (test_freelist_reuse()) {
-        printf(COLOR_GREEN "[ OK ] Test freelist reuse\n" COLOR_RESET);
+        printf(COLOR_GREEN "[ OK ]" COLOR_RESET "\n");
         return EXIT_SUCCESS;
     } else {
-        printf(COLOR_RED "[ FAIL ] Test freelist reuse\n" COLOR_RESET);
+        printf(COLOR_RED "[ FAIL ]" COLOR_RESET "\n");
         return EXIT_FAILURE;
     }
 }
