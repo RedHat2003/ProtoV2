@@ -87,7 +87,7 @@ Array_NewFromDescr_int(
     fa->descr = descr ; 
     fa->base = (Object* )NULL ; 
     fa->weakreflist = (Object* )NULL ; 
-
+    
     
     return (Object* )fa ; 
 }

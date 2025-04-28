@@ -1,6 +1,6 @@
 #include "types.h"
 #include "clinic/ndarrayobj.h"
-#include "clinic/array/descriptor.h"
+#include "internal/array_internals/_core/descriptor.h"
 
 Array_LagacyDescr INT_Descr = {
     .ad_base = {
