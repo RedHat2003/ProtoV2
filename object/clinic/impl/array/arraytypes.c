@@ -8,7 +8,7 @@ Array_LagacyDescr INT_Descr = {
             .ref_cnt = 1 ,
             .tp_type = ArrayDescr_MetaType 
         },
-        .typeobj = &IntArrObject_Type ,
+        .typeobj = NULL ,
         .kind = _SIGNEDLTR ,  
         .type = _SIGNEDLTR , 
         .byteorder = '=',

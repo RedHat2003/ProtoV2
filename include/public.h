@@ -8,8 +8,6 @@
 #include "refcount.h"
 #include "clinic/tupleobj.h"
 #include "clinic/tpobject.h"
-#include "clinic/intarrobj.h"
 #include "clinic/ndarrayobj.h"
-#include "clinic/floatarrobj.h"
 
 #endif

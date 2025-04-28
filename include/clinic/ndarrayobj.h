@@ -3,8 +3,8 @@
 
 #include "object.h"
 #include "objhelper.h"
-#include "clinic/intarrobj.h"
 #include "clinic/tpobject.h"
+#include <stdio.h>
 
 #define MAXDIMS 64 
 #define MAXDIMS_LEGACY_ITERS 32
@@ -70,7 +70,7 @@ typedef struct tagArrayObject_fields {
     Object_HEAD
     char* data ; 
     int nd ;
-    IntArrObject*  layout ;
+    ssize_t*  dimensions ;
     /*
      * Number of bytes to jump to get to the
      * next element in each dimension
@@ -93,8 +93,8 @@ typedef struct array_descrmetadtype {
 
 Object* 
 Array_New (
-        TypeObject* subtype, int nd , int const* dims , int type_num ,
-        int const* strides ,void* data, int flags,
+        TypeObject* subtype, int nd , ssize_t const* dims , int type_num ,
+        ssize_t const* strides ,void* data, int flags,
         Object* obj) ; 
 
 #endif

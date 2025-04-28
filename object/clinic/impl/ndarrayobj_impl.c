@@ -10,6 +10,8 @@
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
 
+
+
 Array_Descr* 
 Array_DescrFromType(int ); 
 
@@ -36,7 +38,7 @@ Array_Descr* Get(int type) {
 Object* 
 Array_NewFromDescr_int(
       TypeObject* subtype , Array_Descr* descr ,int nd ,
-      int const* dims , int const* strides , void* data ,
+      ssize_t const* dims , ssize_t const* strides , void* data ,
       int flags , Object* obj , Object* base , _NPY_CREATION_FLAGS cflags ){
     
     ArrayObject_fields* fa ; 
@@ -47,6 +49,7 @@ Array_NewFromDescr_int(
     (void)obj;
     (void)base;
     (void)cflags;
+    (void)dims ; 
 
     if (nd > MAXDIMS || nd < 0 ) {
        return NULL ;
@@ -60,7 +63,7 @@ Array_NewFromDescr_int(
     }
 
     fa->nd = nd ; 
-    fa->layout = NULL ;
+    fa->dimensions = NULL ;
     fa->weakreflist = NULL ; 
     fa->data = NULL ; 
     if (data ==NULL) {
@@ -74,16 +77,7 @@ Array_NewFromDescr_int(
         //just for this moment ! 
     }
     
-    if (nd > 0) {
-        fa->layout = IntArr_New(nd * 2) ; 
-        if (fa->layout == NULL) {
-            return NULL;
-        }
-        for (int i =0 ; i <nd ; i++) {
-            fa->layout->data._data[i] = dims[i] ; 
-        }
 
-    }
     fa->descr = descr ; 
     fa->base = (Object* )NULL ; 
     fa->weakreflist = (Object* )NULL ; 
@@ -95,7 +89,7 @@ Array_NewFromDescr_int(
 Object *
 Array_NewFromDescrAndBase(
         TypeObject *subtype, Array_Descr *descr,
-        int nd, int const *dims, int const *strides, void *data,
+        int nd, ssize_t const *dims, ssize_t const *strides, void *data,
         int flags, Object *obj, Object *base) {
 
     return Array_NewFromDescr_int(subtype, descr, nd,
@@ -106,7 +100,7 @@ Array_NewFromDescrAndBase(
 Object* 
 Array_NewFromDescr(
         TypeObject *subtype, Array_Descr *descr,
-        int nd, int const *dims, int const *strides, void *data,
+        int nd, ssize_t const *dims, ssize_t const *strides, void *data,
         int flags, Object *obj) {
 
     return Array_NewFromDescrAndBase(
@@ -117,8 +111,8 @@ Array_NewFromDescr(
 
 Object* 
 Array_New (
-        TypeObject* subtype, int nd , int const* dims , int type_num ,
-        int const* strides ,void* data, int flags,
+        TypeObject* subtype, int nd , ssize_t const* dims , int type_num ,
+        ssize_t const* strides ,void* data, int flags,
         Object* obj) {
     Array_Descr* descr ; 
     Object* new ; 

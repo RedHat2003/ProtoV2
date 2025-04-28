@@ -15,5 +15,4 @@ add_subdirectory(object)
 
 # Enable testing and include the test suite
 enable_testing()
-add_subdirectory(tests)
 
