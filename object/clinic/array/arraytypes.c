@@ -1,11 +1,12 @@
 #include "types.h"
 #include "clinic/ndarrayobj.h"
+#include "clinic/array/descriptor.h"
 
 Array_LagacyDescr INT_Descr = {
     .ad_base = {
         .ob_base = {
             .ref_cnt = 1 ,
-            .tp_type = NULL 
+            .tp_type = ArrayDescr_MetaType 
         },
         .typeobj = &IntArrObject_Type ,
         .kind = _SIGNEDLTR ,  

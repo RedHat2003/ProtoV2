@@ -81,6 +81,15 @@ typedef struct tagArrayObject_fields {
     Object* weakreflist ; // maybe i would change it to tuple latter 
 }ArrayObject_fields;
 
+typedef struct array_descrmetadtype {
+    TypeObject super ;
+    Array_Descr* singleton;
+    int type_num ; 
+    TypeObject* scalar_type ; 
+    unsigned long flags ; 
+    void* dt_slots ; 
+    void* reserved[3] ; 
+} Array_DTypeMeta; 
 
 Object* 
 Array_New (
