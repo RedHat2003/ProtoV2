@@ -1,10 +1,11 @@
 #include "types.h"
 #include "clinic/ndarray/ndarray_descr.h"
+#include "clinic/ndarray/ndarray_dtype.h"
 
 Array_Descr INT_Descr = {
     .ob_base = {
         .ref_cnt = 1 ,
-        .tp_type = NULL  
+        .tp_type = ArrayDtype_Type  
     },
     .typeobj = NULL ,
     .flags = 0 ,
