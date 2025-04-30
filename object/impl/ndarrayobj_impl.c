@@ -31,6 +31,22 @@ Array_Descr* Array_DescrFromType(int type) {
     _INCREF((Object*)ret);
     return ret;
 }
+static void
+_array_fill_strides(ssize_t* strides,
+                    const ssize_t *dims,
+                    int nd,
+                    ssize_t itemsize,
+                    int *objflags)
+{
+    /* Compute C-order strides (row-major) */
+    for (int i = nd - 1; i >= 0; --i) {
+        strides[i] = itemsize;
+        itemsize *= dims[i];
+    }
+
+    /* Mark as C-contiguous */
+    *objflags |= ARRAY_C_CONTIGUOUS ;
+} 
 
 Object* 
 Array_NewFromDescr_int(
@@ -74,6 +90,10 @@ Array_NewFromDescr_int(
         //just for this moment ! 
     }
 
+    fa->descr = descr ; 
+    fa->base = (Object* )NULL ; 
+    fa->weakreflist = (Object* )NULL ; 
+     
     if (nd > 0 ) {
         fa->dimensions = (ssize_t* )dim_alloc(2 * nd) ; 
         fa->strides = fa->dimensions + nd ; 
@@ -81,13 +101,14 @@ Array_NewFromDescr_int(
         for (int i = 0 ; i <nd ; i++) {
             fa->dimensions[i] = dims[i] ; 
         }
+
+        if (strides ==NULL) {
+            _array_fill_strides(fa->strides, dims, nd, descr->elsize,
+                                &(fa->flags));
+        }
     }
     
 
-    fa->descr = descr ; 
-    fa->base = (Object* )NULL ; 
-    fa->weakreflist = (Object* )NULL ; 
-     
     
     return (Object* )fa ; 
 }

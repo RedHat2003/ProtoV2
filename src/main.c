@@ -14,6 +14,11 @@ int main (void) {
         printf("%zu ",fa->dimensions[i]) ; 
     }
     printf("\n") ; 
+    
+    for (int i = 3 ; i <6 ; i++) {
+        printf("%zu " , fa->dimensions[i] ) ; 
+    }
+    printf("\n") ; 
 
     Object_Free (ndarr) ; 
     return 0;
