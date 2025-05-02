@@ -1,9 +1,9 @@
 # object/impl/ndarray/CMakeLists.txt
 
 add_library(ndarray_impl_lib OBJECT
-    ndarray_alloc.c
-    ndarray_dtype.c
-    ndarray_descr.c
+    alloc.c
+    dtype.c
+    descr.c
 )
 
 target_include_directories(ndarray_impl_lib PRIVATE

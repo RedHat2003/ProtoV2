@@ -1,8 +1,9 @@
+#include "clinic/ndarray/ndarray_dtype.h"
+#include "clinic/ndarrayobj.h"
 #include "objimpl.h"
 #include "public.h"
 #include "clinic/array_api.h"
 #include <stdio.h>
-
 
 int main (void) {
     ssize_t dims[3] = { 1,2,3 };

@@ -18,11 +18,12 @@ _Object_Var_SIZE(TypeObject* tp, ssize_t nitem) {
     size += nitem * tp->tp_itemsize;
     return size;
 }
-const char* 
 
+
+TypeObject*
 _Get_ObjType(Object* ob){
     TypeObject* tp = ob->tp_type ; 
-    return tp->tp_name;
+    return tp;
 }
 
 #define TYPE_INCREF(tp)  _INCREF((Object *)(tp))

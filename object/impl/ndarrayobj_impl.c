@@ -10,7 +10,7 @@
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
 #include "clinic/ndarray/ndarray_helpers.h"
-
+#include "clinic/ndarray/ndarray_dtype.h"
 
 
 Array_Descr* 
@@ -107,6 +107,8 @@ Array_NewFromDescr_int(
                                 &(fa->flags));
         }
     }
+
+    
     
 
     

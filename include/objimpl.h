@@ -16,7 +16,7 @@ VarObject* _Object_NewVar(TypeObject* tp , ssize_t nitem) ;
 void _Object_Dealloc (Object* op) ; 
 ssize_t _Object_refcnt (Object* ob ) ; 
 ssize_t _Get_VarSize(VarObject* vob) ; 
-char* _Get_ObjType(Object* ob) ; 
+TypeObject* _Get_ObjType(Object* ob) ; 
 #define Object_refcnt(op) _Object_refcnt((Object*)op)
 #define Object_SIZE(tp) _Object_SIZE(tp)
 #define Object_Var_SIZE(tp, n) _Object_Var_SIZE((tp), (n))
