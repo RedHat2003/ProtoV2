@@ -10,4 +10,7 @@ Array_New (
         ssize_t const* strides ,void* data, int flags,
         Object* obj) ; 
 
+Array_Descr* 
+Array_DescrFromType(int Type) ; 
+
 #endif

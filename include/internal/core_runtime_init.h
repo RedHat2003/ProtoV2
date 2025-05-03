@@ -1,22 +1,29 @@
-#ifndef CORE_RUNTIME_INIT 
-#define CORE_RUNTIME_INIT 
+#ifndef CORE_RUNTIME_INIT
+#define CORE_RUNTIME_INIT
 
-#include "core_runtime.h" 
+#include "core_runtime.h"
 #include "core_mem.h"
 #include "core_mem_init.h"
+#include "core_types.h"  /* for TypeInitRegistry */
+
+// Declare the one-shot wrapper for all legacy dtypes
+int wrap_legacy_types(void);
 
 #define _RuntimeState_INIT(runtime)                       \
     {                                                     \
       .allocators = {                                     \
           .standard    = _mem_allocators_standard_INIT(), \
       },                                                  \
-      .Freelists = {                                      \
+      .freelists = {                                      \
           .tuple_iters = {                                \
               .freelist = NULL,                           \
               .size     = 0                               \
           },                                              \
       },                                                  \
+      .type_init = {                                      \
+          .init_types  = wrap_legacy_types,              \
+      }                                                   \
     }
 
-#endif 
+#endif  /* CORE_RUNTIME_INIT */
 
