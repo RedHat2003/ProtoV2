@@ -107,11 +107,7 @@ Array_NewFromDescr_int(
                                 &(fa->flags));
         }
     }
-
-    
-    
-
-    
+ 
     return (Object* )fa ; 
 }
 

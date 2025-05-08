@@ -1,11 +1,11 @@
-#include "clinic/ndarray/ndarray_dtype.h"
 #include "clinic/ndarrayobj.h"
+#include "clinic/ndarray/ndarray_dtype.h"
+#include "clinic/ndarray/ndarray_descr.h"
 #include "objimpl.h"
 #include "public.h"
 #include "clinic/array_api.h"
 #include <stdio.h>
 
-extern 
 
 int main (void) {
     ssize_t dims[3] = { 1,2,3 };
@@ -22,12 +22,13 @@ int main (void) {
         printf("%zu " , fa->dimensions[i] ) ; 
     }
     printf("\n") ; 
-    if (Get_ObjType(Array_DescrFromType(0))==&*ArrayDtype_Type){
+    if (Get_ObjType(Array_DescrFromType(0))==&ArrayDtype_Type){
         printf ("all is good ! \n") ; 
     }
-    Object_Free (ndarr) ;
 
-    if (type_init()) {
+    Object_Free (ndarr) ;
+    Array_Descr* descr = Array_DescrFromType(0) ; 
+    if (type_init(descr)) {
         printf ("its what it is \n") ; 
     }
     return 0;

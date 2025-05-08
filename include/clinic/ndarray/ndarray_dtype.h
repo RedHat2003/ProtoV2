@@ -17,7 +17,7 @@ typedef struct {
 extern Array_DTypeMeta _ArrayDescr_MetaType;
 
 // Convenience alias for the Array_Descr type object
-#define ArrayDtype_Type  ((TypeObject *)&_ArrayDescr_MetaType)
+#define ArrayDtype_Type  (*(TypeObject *)&_ArrayDescr_MetaType)
 
 /**
  * DType

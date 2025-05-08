@@ -5,7 +5,7 @@
 Array_Descr INT_Descr = {
     .ob_base = {
         .ref_cnt = 1 ,
-        .tp_type = ArrayDtype_Type  
+        .tp_type = &ArrayDtype_Type  
     },
     .typeobj = NULL ,
     .flags = 0 ,
