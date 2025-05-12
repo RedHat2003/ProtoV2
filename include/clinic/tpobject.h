@@ -11,6 +11,7 @@ struct typeobject {
     newfunc tp_new ; 
     destructor tp_dealloc ; 
     allocfunc tp_alloc ; 
+    struct typeobject* tp_base ; 
 };
 
 Object* 

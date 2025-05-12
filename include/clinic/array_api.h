@@ -4,6 +4,10 @@
 #include "object.h"
 #include "clinic/ndarrayobj.h"
 
+
+//just for now !
+extern TypeObject ArrayDTypeMeta_Type ; 
+
 Object* 
 Array_New (
         TypeObject* subtype, int nd , ssize_t const* dims , int type_num ,

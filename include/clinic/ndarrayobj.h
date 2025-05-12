@@ -31,6 +31,7 @@ typedef struct  {
     TypeObject super ;
     TypeObject* scalar_type ; 
     void* dt_slots ; 
+    int type_num ; 
 } Array_DTypeMeta; 
 
 

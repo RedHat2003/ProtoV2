@@ -21,7 +21,12 @@ _Mem_RawFree (void* ptr) {
 
 extern _RuntimeState _Runtime ;
 #define _Object _Runtime.allocators.standard.obj
+#define _Mem _Runtime.allocators.standard.mem
 
+
+/***********************/
+/* the "obj" allocator */
+/***********************/
 
 void* 
 Object_Malloc (ssize_t size) {
@@ -32,3 +37,19 @@ void
 Object_Free (void* ptr){
     _Object.free (ptr) ; 
 }
+
+
+/***********************/
+/* the "mem" allocator */
+/***********************/
+void* 
+Mem_Malloc (ssize_t size) {
+    return _Mem.malloc(size) ; 
+}
+
+void 
+Mem_Free (void* ptr ) {
+    _Mem.free (ptr) ; 
+}
+
+
