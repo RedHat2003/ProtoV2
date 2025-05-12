@@ -13,7 +13,8 @@ target_include_directories(test_dtype_parent
 # e.g. if it needs your object library:
 target_link_libraries(test_dtype_parent
     PRIVATE
-      object_lib
+    hat
+    object_lib
 )
 
 # register it with CTest so `ctest` will run it

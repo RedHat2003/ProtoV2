@@ -1,15 +1,15 @@
-#include "include/objimpl.h"
+
 #include "include/mem.h"
 #include "clinic/ndarray/ndarray_descr.h"
 #include "clinic/ndarray/ndarray_dtype.h"
-#include <string.h>
 #include "clinic/array_api.h"
-
+#include <stdio.h>
+#include <string.h>
 
 int  wrap_legacy_types(Array_Descr* descr ) {
     int has_type = Get_ObjType(descr) == &ArrayDtype_Type ; 
-    if (has_type) {
-        return 1 ; 
+    if (!has_type) {
+        return -1 ; 
     }
     DType_Slots* dt_slots = (DType_Slots* )Mem_Malloc (sizeof (DType_Slots)) ; 
     if (dt_slots == NULL) {
@@ -38,6 +38,7 @@ int  wrap_legacy_types(Array_Descr* descr ) {
     }; 
     memcpy(dtype_class, &prototype, sizeof(Array_DTypeMeta));
     SET_TYPE(descr, (TypeObject *)dtype_class);
+    printf("all is good ! \n") ; 
 
     return 0;
 }
