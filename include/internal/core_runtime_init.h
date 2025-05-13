@@ -7,7 +7,7 @@
 #include "core_types.h"  /* for TypeInitRegistry */
 
 // Declare the one-shot wrapper for all legacy dtypes
-int wrap_legacy_types(Array_Descr* descr);
+int wrap_legacy_types(Array_Descr* descr,char* name , TypeObject* dtype_super_class );
 
 #define _RuntimeState_INIT(runtime)                       \
     {                                                     \

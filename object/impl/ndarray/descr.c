@@ -3,6 +3,9 @@
 #include "clinic/ndarrayobj.h"
 #include "clinic/ndarray/ndarray_dtype.h"
 
+
+#define INT_Name "Int"
+
 static DType_Slots array_dtype_slots = {
     .get_fill_zero_loop = NULL ,
 }; 

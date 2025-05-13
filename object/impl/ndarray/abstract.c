@@ -1,7 +1,7 @@
 #include "clinic/ndarrayobj.h"
 #include "clinic/ndarray/ndarray_dtype.h"
-#include "clinic/array_api.h"
 
+#include "clinic/ndarray/_src/dtypemeta.h"
 
 Array_DTypeMeta Array_IntAbstractSType = {
     .super = {

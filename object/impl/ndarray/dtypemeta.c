@@ -1,7 +1,7 @@
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
 
-
+// includable from ndarray/_src/dtypemeta.h 
 TypeObject ArrayDTypeMeta_Type = {
     .ob_base = {
         .ob_base = {
@@ -14,4 +14,3 @@ TypeObject ArrayDTypeMeta_Type = {
     .tp_name = "DTypeMeta" ,
     .tp_base = NULL  
 } ; 
-

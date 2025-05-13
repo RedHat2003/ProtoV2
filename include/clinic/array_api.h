@@ -5,8 +5,6 @@
 #include "clinic/ndarrayobj.h"
 
 
-//just for now !
-extern TypeObject ArrayDTypeMeta_Type ; 
 
 Object* 
 Array_New (

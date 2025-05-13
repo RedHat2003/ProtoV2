@@ -2,11 +2,12 @@
 #include "include/mem.h"
 #include "clinic/ndarray/ndarray_descr.h"
 #include "clinic/ndarray/ndarray_dtype.h"
-#include "clinic/array_api.h"
+#include "clinic/ndarray/_src/dtypemeta.h"
+
 #include <stdio.h>
 #include <string.h>
 
-int  wrap_legacy_types(Array_Descr* descr ) {
+int  wrap_legacy_types(Array_Descr* descr , char* name , TypeObject* dtype_super_class ) {
     int has_type = Get_ObjType(descr) == &ArrayDtype_Type ; 
     if (!has_type) {
         return -1 ; 
@@ -37,6 +38,8 @@ int  wrap_legacy_types(Array_Descr* descr ) {
         },
     }; 
     memcpy(dtype_class, &prototype, sizeof(Array_DTypeMeta));
+    ((TypeObject*)dtype_class)->tp_name = name ; 
+    (void)dtype_super_class ; 
     SET_TYPE(descr, (TypeObject *)dtype_class);
     printf("all is good ! \n") ; 
 
