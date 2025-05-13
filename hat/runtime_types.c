@@ -38,8 +38,11 @@ int  wrap_legacy_types(Array_Descr* descr , char* name , TypeObject* dtype_super
         },
     }; 
     memcpy(dtype_class, &prototype, sizeof(Array_DTypeMeta));
-    ((TypeObject*)dtype_class)->tp_name = name ; 
-    (void)dtype_super_class ; 
+    ((TypeObject* )dtype_class)->tp_name = name ; 
+    ((TypeObject* )dtype_class)->tp_base = dtype_super_class  ; 
+
+    dtype_class->dt_slots = dt_slots ; 
+
     SET_TYPE(descr, (TypeObject *)dtype_class);
     printf("all is good ! \n") ; 
 
