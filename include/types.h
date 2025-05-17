@@ -8,6 +8,6 @@
 extern TypeObject TypeObject_Type ; 
 extern TypeObject TupleObjet_Type ; 
 extern TypeObject ArrayObject_Type ; 
-
+extern TypeObject Capsule_Type ; 
 
 #endif

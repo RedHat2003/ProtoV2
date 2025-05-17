@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 # Object module library
 file(GLOB OBJECT_SOURCES
-    typeobject.c
-    intarrobj.c
-    tupleobj.c
-    floatarrobj.c
-    ndarrayobj.c
+    type.c
+    intarr.c
+    tuple.c
+    floatarr.c
+    ndarray.c
+    capsule.c 
 )
 file(GLOB CLINIC_SOURCES
     impl/*.c
