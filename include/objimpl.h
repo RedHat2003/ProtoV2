@@ -31,7 +31,7 @@ void       _Object_Dealloc    (Object *ob);
 #define Object_SIZE(tp)         _Object_SIZE((tp))
 #define Object_Var_SIZE(tp,n)   _Object_Var_SIZE((tp),(n))
 #define Object_refcnt(ob)       _Object_refcnt((Object *)(ob))
-#define Get_ObjType(ob)         _Get_ObjType((Object *)(ob))
+#define Get_ObjType(op)         _Get_ObjType((Object *)(op))
 
 #define SET_TYPE(ob,tp)         _SET_TYPE((Object *)(ob),(tp))
 #define Get_VarSize(vob)        _Get_VarSize((VarObject *)(vob))
@@ -44,6 +44,7 @@ void       _Object_Dealloc    (Object *ob);
 #define Object_NewVar(type,tp,n) ((type *)_Object_NewVar((tp),(n)))
 #define Object_New(type,tp)      ((type *)_Object_New((tp)))
 #define Object_Dealloc(ob)       _Object_Dealloc((Object *)(ob))
+
 
 #ifdef __cplusplus
 } /* extern "C" */

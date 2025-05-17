@@ -1,6 +1,7 @@
 #include "clinic/ndarrayobj.h"
 #include "clinic/ndarray/ndarray_dtype.h"
 #include "clinic/ndarray/ndarray_descr.h"
+#include "clinic/ndarray/_src/handler.h"
 #include "objimpl.h"
 #include "public.h"
 #include "clinic/array_api.h"
@@ -31,5 +32,7 @@ int main (void) {
     if (type_init(descr)) {
         printf ("its what it is \n") ; 
     }
+    init_memory_handler() ; 
+
     return 0;
 }

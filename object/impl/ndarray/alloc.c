@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include "object.h"
+#include "clinic/capsule.h"
 #include <clinic/ndarray/ndarray_alloc.h>
-
+#include "clinic/ndarray/_src/handler.h"
 static inline void* 
 _alloc(size_t nelem, size_t esz, void* (*alloc)(size_t)) {
     return alloc(nelem * esz);
@@ -41,4 +43,16 @@ DataMem_Handler default_handler = {
         .free = default_free
     }
 };
+
+
+
+
+Object *DataMem_DefaultHandler;
+Object *current_handler;
+
+void init_memory_handler(void) {
+    DataMem_DefaultHandler = Capsule_New(&default_handler, "mem_handler");
+    current_handler = DataMem_DefaultHandler;
+}
+
 

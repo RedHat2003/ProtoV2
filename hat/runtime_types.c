@@ -3,7 +3,6 @@
 #include "clinic/ndarray/ndarray_descr.h"
 #include "clinic/ndarray/ndarray_dtype.h"
 #include "clinic/ndarray/_src/dtypemeta.h"
-
 #include <stdio.h>
 #include <string.h>
 
@@ -48,3 +47,4 @@ int  wrap_legacy_types(Array_Descr* descr , char* name , TypeObject* dtype_super
 
     return 0;
 }
+
