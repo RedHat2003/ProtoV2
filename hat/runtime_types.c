@@ -1,10 +1,10 @@
-
+#include <stdio.h>
+#include <string.h>
 #include "include/mem.h"
 #include "clinic/ndarray/ndarray_descr.h"
 #include "clinic/ndarray/ndarray_dtype.h"
 #include "clinic/ndarray/_src/dtypemeta.h"
-#include <stdio.h>
-#include <string.h>
+#include "internal/core_array/core_types.h" 
 
 int  wrap_legacy_types(Array_Descr* descr , char* name , TypeObject* dtype_super_class ) {
     int has_type = Get_ObjType(descr) == &ArrayDtype_Type ; 

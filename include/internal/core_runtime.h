@@ -3,14 +3,15 @@
 
 #include "core_mem.h"
 #include "core_freelist_state.h"
-#include "core_types.h"
+#include "core_array/core_array_state.h"
+
 
 typedef struct {
     _mem_allocators   allocators;
     _Freelists        freelists;
+    
+    _ArraySubSys      arraysubsys ; 
 
-    // One entry: the master types-init function
-    TypeInitRegistry  type_init;
 } _RuntimeState;
 
 
