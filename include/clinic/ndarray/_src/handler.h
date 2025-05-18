@@ -1,9 +1,7 @@
 #ifndef HANDLER_H 
 #define HANDLER_H
 
-
-void init_memory_handler(void)  ; 
-
+char* currnet_handler_name(void) ; 
 
 
 #endif

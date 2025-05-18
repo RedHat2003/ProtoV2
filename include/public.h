@@ -9,6 +9,6 @@
 #include "clinic/tupleobj.h"
 #include "clinic/tpobject.h"
 #include "clinic/ndarrayobj.h"
-int type_init() ; 
+int global_init() ; 
 
 #endif

@@ -1,58 +1,43 @@
-#include <stdlib.h>
 #include "object.h"
+#include <stdlib.h>
 #include "clinic/capsule.h"
-#include <clinic/ndarray/ndarray_alloc.h>
-#include "clinic/ndarray/_src/handler.h"
-static inline void* 
-_alloc(size_t nelem, size_t esz, void* (*alloc)(size_t)) {
-    return alloc(nelem * esz);
+#include "internal/core_runtime.h"
+
+extern _RuntimeState _Runtime ; 
+
+
+void* 
+_alloc(size_t nelem, size_t esz) {
+    return _Runtime.arraysubsys.default_handler.allocator.malloc(NULL ,nelem * esz) ; 
 }
 
-static inline void 
-_free(void* ptr, size_t nelem, void (*dealloc)(void*)) {
-    (void)nelem;
-    dealloc(ptr);
+void 
+_free(void* ptr) {
+    _Runtime.arraysubsys.default_handler.allocator.free(NULL, ptr);
 }
+
 
 void* 
 dim_alloc(size_t sz) {
-    if (sz < 2) {
-        sz = 2;
+    if (sz <2 ) {
+        sz =2 ; 
     }
-    return _alloc(sz, sizeof(size_t), &malloc);
+    return _alloc(sz , sizeof(size_t));
 }
 
-static inline void* 
-default_malloc(void* ctx, ssize_t size) {
-    (void)ctx;
-    if (size <= 0) return NULL;
-    return malloc((size_t)size);
+static inline DataMem_Handler* 
+current_handler_get() {
+    _RuntimeState* cruntime = &_Runtime ; 
+    _ArraySubSys* arrsys  = arraysubsys_get(cruntime) ; 
+    return &arrsys->default_handler ; 
 }
 
-static inline void 
-default_free(void* ctx, void* ptr, ssize_t size) {
-    (void)ctx;
-    _free(ptr,size , &free);
+char* 
+currnet_handler_name(void){
+    DataMem_Handler* chandler = current_handler_get() ; 
+    return chandler->name;
 }
 
-DataMem_Handler default_handler = {
-    .name = "default_handler",
-    .allocator = {
-        .ctx = NULL,
-        .malloc = default_malloc,
-        .free = default_free
-    }
-};
 
-
-
-
-Object *DataMem_DefaultHandler;
-Object *current_handler;
-
-void init_memory_handler(void) {
-    DataMem_DefaultHandler = Capsule_New(&default_handler, "mem_handler");
-    current_handler = DataMem_DefaultHandler;
-}
 
 

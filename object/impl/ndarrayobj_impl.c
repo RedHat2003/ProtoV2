@@ -94,6 +94,11 @@ Array_NewFromDescr_int(
     fa->base = (Object* )NULL ; 
     fa->weakreflist = (Object* )NULL ; 
      
+
+    fa->descr = descr ; 
+    fa->base = (Object* )NULL ; 
+    fa->weakreflist = (Object* )NULL ; 
+     
     if (nd > 0 ) {
         fa->dimensions = (ssize_t* )dim_alloc(2 * nd) ; 
         fa->strides = fa->dimensions + nd ; 
@@ -108,6 +113,7 @@ Array_NewFromDescr_int(
         }
     }
  
+
     return (Object* )fa ; 
 }
 
