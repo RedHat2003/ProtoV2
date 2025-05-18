@@ -4,7 +4,6 @@
 #include "clinic/tpobject.h"
 #include "internal/core_runtime.h"
 
-extern _RuntimeState _Runtime ; 
 extern Array_Descr* _buildin_descrs[] ;
 
 int main () {

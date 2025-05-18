@@ -1,14 +1,14 @@
 #ifndef CORE_FREELIST_H
 #define CORE_FREELIST_H 
 #include "object.h"
-#include "core_freelist_state.h" 
 #include "core_runtime.h"
+#include "core_freelist_state.h" 
+#include "internal/core_runtime_init.h"
 
-extern _RuntimeState _Runtime ;
 
 static inline _Freelists*
 _freelists_GET(void) {
-    return &(_Runtime.Freelists);
+    return &(_Runtime.freelists);
 }
 
 #define _FREELIST_GET(NAME)     \

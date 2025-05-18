@@ -2,11 +2,9 @@
 #include "internal/core_runtime.h"
 #include "internal/core_runtime_init.h"
 #include "internal/core_array/core_array_init.h"
-
-extern _RuntimeState _Runtime;
+_RuntimeState _Runtime = _RuntimeState_INIT(&_Runtime);  
 extern Array_Descr* _buildin_descrs[];
 
-_RuntimeState _Runtime = _RuntimeState_INIT(Runtime);
 
 int global_init(void)
 {

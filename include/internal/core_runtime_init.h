@@ -24,5 +24,7 @@
 }
 
 
+extern _RuntimeState _Runtime;
+
 #endif  /* CORE_RUNTIME_INIT */
 

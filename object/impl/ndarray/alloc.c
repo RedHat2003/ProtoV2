@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include "clinic/capsule.h"
 #include "internal/core_runtime.h"
-
-extern _RuntimeState _Runtime ; 
-
+#include "internal/core_runtime_init.h"
 
 void* 
 _alloc(size_t nelem, size_t esz) {

@@ -3,8 +3,8 @@
 #include "internal/core_runtime.h"
 #include "clinic/array_api.h"
 #include "internal/core_array/core_array_init.h"
+#include "internal/core_runtime_init.h"
 
-extern _RuntimeState _Runtime;
 extern Array_Descr* _buildin_descrs[];
 
 int set_default_types_init(void)

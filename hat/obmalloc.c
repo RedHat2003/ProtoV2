@@ -2,6 +2,7 @@
 
 #include "internal/core_mem.h"
 #include "internal/core_runtime.h"
+#include "internal/core_runtime_init.h"
 void *
 _Mem_RawMalloc(ssize_t size)
 {
@@ -19,7 +20,6 @@ _Mem_RawFree (void* ptr) {
     free(ptr) ; 
 }
 
-extern _RuntimeState _Runtime ;
 #define _Object _Runtime.allocators.standard.obj
 #define _Mem _Runtime.allocators.standard.mem
 
