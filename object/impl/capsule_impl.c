@@ -16,3 +16,9 @@ Capsule_New (void* ptr , const char* name ) {
     capsule->pointer = ptr ; 
     return (Object*)capsule;
 }
+
+void* 
+Capsule_GetPointer(Object* op) {
+     CapsuleObj* capsule = (CapsuleObj* )op ; 
+     return capsule->pointer;
+}

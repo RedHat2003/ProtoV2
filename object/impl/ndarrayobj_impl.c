@@ -11,6 +11,7 @@
 #include "clinic/ndarrayobj.h"
 #include "clinic/ndarray/ndarray_helpers.h"
 #include "clinic/ndarray/ndarray_dtype.h"
+#include "clinic/ndarray/_src/handler.h"
 
 
 Array_Descr* 
@@ -55,19 +56,20 @@ Array_NewFromDescr_int(
       int flags , Object* obj , Object* base , _NPY_CREATION_FLAGS cflags ){
     
     ArrayObject_fields* fa ; 
-    int nbytes ; 
-    // Explicitly mark variables as unused to prevent compiler warnings
-    (void)nbytes;
+    ssize_t nbytes ; 
     (void)strides;
     (void)obj;
     (void)base;
     (void)cflags;
-    (void)dims ; 
 
     if (nd > MAXDIMS || nd < 0 ) {
        return NULL ;
     }
-    nbytes = descr->elsize ;
+
+    nbytes = descr->elsize;
+    for (int i = 0; i < nd; i++) {
+        nbytes *= dims[i];
+    }
 
     fa = (ArrayObject_fields* )subtype->tp_alloc(subtype , 0 ) ; 
 
@@ -87,13 +89,7 @@ Array_NewFromDescr_int(
     }
     else {
         data = NULL ; 
-        //just for this moment ! 
     }
-
-    fa->descr = descr ; 
-    fa->base = (Object* )NULL ; 
-    fa->weakreflist = (Object* )NULL ; 
-     
 
     fa->descr = descr ; 
     fa->base = (Object* )NULL ; 
@@ -112,10 +108,21 @@ Array_NewFromDescr_int(
                                 &(fa->flags));
         }
     }
- 
+    fa->mem_handler = current_handler ;  
+    
+    if (fa->mem_handler ==NULL ) {
+        return NULL;
+    }
+    data = DataMem_UserNEW(nbytes , fa->mem_handler) ; 
 
+    if (data == NULL) {
+        return NULL ;  
+    }
+    fa->data = data ; 
+    
     return (Object* )fa ; 
 }
+
 
 Object *
 Array_NewFromDescrAndBase(

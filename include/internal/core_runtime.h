@@ -22,6 +22,7 @@ arraysubsys_get(_RuntimeState* runtime) {
     return &runtime->arraysubsys;
 }
 
+void _Is_Initialized() ; 
 
 
 #endif // CORE_RUNTIME_H

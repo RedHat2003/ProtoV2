@@ -1,15 +1,13 @@
-#include "public.h"
 #include <stdio.h>
+#include "public.h"
 #include "clinic/array_api.h"
-#include "clinic/tpobject.h"
-#include "internal/core_runtime.h"
-
-extern Array_Descr* _buildin_descrs[] ;
+#include "clinic/ndarray/ndarray_descr.h"
 
 int main () {
+    Array_Descr* int_desct = Array_DescrFromType(0) ;  
+    printf ("Int Descr Type before Runtime init is : %s\n", int_desct->ob_base.tp_type->tp_name) ; 
     global_init() ; 
-    Object* int_desct = (Object* )_buildin_descrs[0] ; 
-    printf ("the name of the descr type is : %s\n" , int_desct->tp_type->tp_name) ; 
+    printf ("Int Descr Type after Runtime init is : %s\n", int_desct->ob_base.tp_type->tp_name) ; 
     return 0;
 }
 

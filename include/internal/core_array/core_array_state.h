@@ -6,7 +6,7 @@
 
 typedef struct arrsubsys {
     TypeInitRegistry type_init ; 
-    DataMem_Handler default_handler ;     
+    DataMem_Handler current_handler ;     
     // other would fall here //     
 }_ArraySubSys ; 
 

@@ -1,16 +1,14 @@
 #include <stdio.h>
-#include "clinic/ndarrayobj.h"
-#include "internal/core_runtime.h"
-#include "clinic/array_api.h"
-#include "internal/core_array/core_array_init.h"
 #include "internal/core_runtime_init.h"
+#include "internal/core_runtime.h"
+#include "internal/core_array/core_array_init.h"
 
 extern Array_Descr* _buildin_descrs[];
 
-int set_default_types_init(void)
+int set_default_array_types_init(void)
 {
     printf("[RuntimeInit] Installing default_types_init handler...\n");
-    _Runtime.arraysubsys.type_init.init_func = default_types_init;
+    _Runtime.arraysubsys.type_init.init_func = default_array_types_init;
     if (!_Runtime.arraysubsys.type_init.init_func) {
         fprintf(stderr,
                 "[RuntimeInit][ERROR] could not install default_types_init\n");
@@ -20,7 +18,7 @@ int set_default_types_init(void)
     return 1;
 }
 
-int type_init(Array_Descr* descr,
+int array_types_init(Array_Descr* descr,
               char* name,
               TypeObject* dtype_super_class)
 {

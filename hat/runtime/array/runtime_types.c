@@ -6,7 +6,7 @@
 #include "clinic/ndarray/_src/dtypemeta.h"
 #include "internal/core_array/core_array_init.h"
 
-int default_types_init(Array_Descr* descr,
+int default_array_types_init(Array_Descr* descr,
                        char* name,
                        TypeObject* dtype_super_class)
 {

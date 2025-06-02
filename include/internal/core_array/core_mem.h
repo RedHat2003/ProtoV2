@@ -5,16 +5,9 @@
 #include <sys/types.h>
 #include "clinic/ndarray/_src/handler.h"
 
-static inline void* 
-default_malloc(void* ctx , ssize_t size ) {
-    (void )ctx ; 
-    return malloc(size );
-}
-static inline void 
-default_free (void* ctx , void* ptr){
-    (void )ctx ; 
-    free(ptr) ;
-}
+
+void* default_malloc(void* , ssize_t) ; 
+void default_free   (void* , void* ) ; 
 
 typedef struct {
     void* ctx ; 

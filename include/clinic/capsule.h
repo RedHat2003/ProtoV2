@@ -16,4 +16,7 @@ typedef struct {
 Object* 
 Capsule_New (void * , const char* ) ; 
 
+void*
+Capsule_GetPointer(Object* ) ; 
+
 #endif

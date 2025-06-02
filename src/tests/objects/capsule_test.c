@@ -25,11 +25,11 @@ int main (void) {
         );
 
     // data from the capsule // 
-    int a_capsule1 =  ((Any* )capsule1->pointer)->a ; 
+    Any* capsule1_ptr = Capsule_GetPointer((Object* )capsule1) ;    
 
     printf (
             "a from the capsule1 is : %d\n",
-            a_capsule1
+            capsule1_ptr->a
         );
 
     Object_Free (capsule1)  ; 

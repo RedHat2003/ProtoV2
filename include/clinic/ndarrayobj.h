@@ -25,6 +25,7 @@ typedef struct tagArrayObject_fields {
     Array_Descr* descr ; 
     int flags ; 
     char* data ; 
+    Object* mem_handler ; 
 }ArrayObject_fields;
 
 typedef struct  {

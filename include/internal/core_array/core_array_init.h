@@ -6,15 +6,15 @@
 #include "clinic/tpobject.h"    // for TypeObject
 
 // The “default” implementation
-int default_types_init(Array_Descr *descr,
+int default_array_types_init(Array_Descr *descr,
                        char *name,
                        TypeObject *dtype_super_class);
 
 // Wire it into the RuntimeState
-int set_default_types_init(void);
+int set_default_array_types_init(void);
 
 // Helper to run the current init_func
-int type_init(Array_Descr *descr,
+int array_types_init(Array_Descr *descr,
               char *name,
               TypeObject *dtype_super_class);
 
