@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
+#include <stdint.h>
 
 #include "public.h"
 #include "objimpl.h"
@@ -12,6 +14,7 @@
 #include "clinic/array_api.h"
 
 #include "internal/core_runtime.h"
+#include "internal/core_runtime_init.h"
 #include "internal/core_array/core_mem.h"
 
 int main(void) {
@@ -32,28 +35,23 @@ int main(void) {
     printf("\n");
 
     printf("Garbage (post-dims): ");
-    // printing extra garbage slots just like before
     for (int i = 2; i < 4; i++) {
         printf("%zu ", fa->dimensions[i]);
     }
     printf("\n");
 
-    // —————————
-    // Populate fa->data as a 2×3 int32 buffer
-    // —————————
+    // Fill data
     {
-        int rows = (int)dims[0];   // 2
-        int cols = (int)dims[1];   // 3
+        int rows = (int)dims[0];
+        int cols = (int)dims[1];
         int* data_ptr = (int*)fa->data;
 
-        // fill row-major: row 0→(1,2,3), row 1→(4,5,6)
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 data_ptr[r * cols + c] = r * cols + c + 1;
             }
         }
 
-        // print as 2D
         printf("Data contents (2D):\n");
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -65,18 +63,29 @@ int main(void) {
 
     Object_Free(ndarr);
 
-    // 🔥 Get the current handler and print name
     DataMem_Handler* to_chandler = (DataMem_Handler*)Capsule_GetPointer(current_handler);
     printf("Current handler name: \"%s\"\n", to_chandler->name);
 
-    // 🔥 Allocate and free test
-    void* test_mem = to_chandler->allocator.malloc(NULL, 64);  // Allocate 64 bytes
+    void* test_mem = to_chandler->allocator.malloc(NULL, 64);
     if (test_mem) {
         printf("[OK] Allocation succeeded at %p\n", test_mem);
         to_chandler->allocator.free(NULL, test_mem);
         printf("[OK] Freed the allocated memory.\n");
     } else {
         printf("[ERR] Allocation failed.\n");
+    }
+
+    // 🔍 Compare pthread_self() and runtime_get_thread_ident()
+    unsigned long manual_tid = (unsigned long)(uintptr_t)pthread_self();
+    unsigned long from_run   = runtime_get_thread_ident(&_Runtime);
+
+    printf("manual_tid = %lu\n", manual_tid);
+    printf("from_run   = %lu\n", from_run);
+
+    if (manual_tid == from_run) {
+        printf("[OK] Thread IDs match!\n");
+    } else {
+        printf("[FAIL] Thread IDs differ!\n");
     }
 
     _Is_Initialized();

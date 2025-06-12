@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "internal/core_runtime.h"
 #include "internal/core_runtime_init.h"
-#include "internal/core_array/core_array_init.h"
 #include "clinic/ndarray/_src/handler.h"
+#include "internal/core_array/core_array_init.h"
 
 extern Array_Descr* _buildin_descrs[];
 _RuntimeState _Runtime = _RuntimeState_INIT(&_Runtime);  
@@ -10,16 +10,19 @@ _RuntimeState _Runtime = _RuntimeState_INIT(&_Runtime);
 static int runtime_initialized = 0 ; 
 
 void _Is_Initialized (){
-    if (runtime_initialized){
+    if (_Runtime._initialized){
         printf ("Yes Runtime was initialized !\n");
     }
 }
 
 
-
 int global_init(void)
 {
     printf("[Lifecycle] global_init: starting runtime setup\n");
+
+    if (_RuntimeState_Init(&_Runtime) < 0 ){
+        printf ("[Lifecycle][ERROR] initializing Runtime failed\n") ; 
+    }
 
     if (runtime_initialized) {
         printf ("[Runtime already initialized !\n]") ; 

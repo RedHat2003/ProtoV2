@@ -12,6 +12,10 @@ typedef struct {
     
     _ArraySubSys      arraysubsys ; 
 
+    int _initialized ; 
+
+    unsigned long main_thread;
+
 } _RuntimeState;
 
 
@@ -22,7 +26,14 @@ arraysubsys_get(_RuntimeState* runtime) {
     return &runtime->arraysubsys;
 }
 
+static inline unsigned long 
+runtime_get_thread_ident (_RuntimeState* runtime){
+    return runtime->main_thread ; 
+}
+
 void _Is_Initialized() ; 
+int _RuntimeState_Init(_RuntimeState* runtime) ; 
+
 
 
 #endif // CORE_RUNTIME_H

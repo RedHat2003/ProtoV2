@@ -20,7 +20,8 @@
     .arraysubsys = {                                           \
         .type_init = { .init_func = NULL },                    \
         .current_handler = _DATAMEM_HANDLER_DEFAULT()          \
-    }                                                          \
+    },                                                         \
+    ._initialized = 0                                          \
 }
 
 
